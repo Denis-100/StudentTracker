@@ -18,6 +18,7 @@ public static class DatabaseInitializer
         {
             CreateDatabase();
             CreateTable();
+            CreateDefaultAdmin();
         }
         catch (Exception ex)
         {
@@ -68,16 +69,6 @@ public static class DatabaseInitializer
                                 Name NVARCHAR(50) NOT NULL
                             )
 
-                            IF NOT EXISTS (SELECT * FROM sys.tables WHERE name = 'Users')
-                            CREATE TABLE Users(
-                                Id INT PRIMARY KEY IDENTITY,
-                                Login NVARCHAR(50) NOT NULL UNIQUE,
-                                Password NVARCHAR(MAX) NOT NULL,
-                                Role NVARCHAR(20) NOT NULL,
-                                IdTeacher INT REFERENCES Teachers(Id) ON DELETE SET NULL,
-                                IdStudent INT REFERENCES Students(Id) ON DELETE SET NULL
-                            )
-
                             IF NOT EXISTS (SELECT * FROM sys.tables WHERE name = 'Groups')
                             CREATE TABLE Groups(
                                 Id INT PRIMARY KEY IDENTITY,
@@ -95,6 +86,16 @@ public static class DatabaseInitializer
                                 Phone NVARCHAR(20) NOT NULL DEFAULT '',
                                 Email NVARCHAR(50) NOT NULL DEFAULT '',
                                 IdGroup INT REFERENCES Groups(Id) ON DELETE CASCADE
+                            )
+
+                            IF NOT EXISTS (SELECT * FROM sys.tables WHERE name = 'Users')
+                            CREATE TABLE Users(
+                                Id INT PRIMARY KEY IDENTITY,
+                                Login NVARCHAR(50) NOT NULL UNIQUE,
+                                Password NVARCHAR(MAX) NOT NULL,
+                                Role NVARCHAR(20) NOT NULL,
+                                IdTeacher INT REFERENCES Teachers(Id) ON DELETE SET NULL,
+                                IdStudent INT REFERENCES Students(Id) ON DELETE SET NULL
                             )
 
                             IF NOT EXISTS (SELECT * FROM sys.tables WHERE name = 'Subjects')
@@ -116,6 +117,25 @@ public static class DatabaseInitializer
                             )";
 
             using (SqlCommand command = new SqlCommand(sql, connection))
+            {
+                command.ExecuteNonQuery();
+            }
+        }
+    }
+
+    private static void CreateDefaultAdmin()
+    {
+        using (SqlConnection conn = new SqlConnection(connectionString))
+        {
+            conn.Open();
+
+            string sql = @"IF NOT EXISTS (SELECT 1 FROM Users WHERE Login = 'admin')
+                           BEGIN
+                                INSERT INTO Users (Login, Password, Role)
+                                VALUES ('admin', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918', 'Admin')
+                           END";
+
+            using (SqlCommand command = new SqlCommand(sql, conn))
             {
                 command.ExecuteNonQuery();
             }

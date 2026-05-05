@@ -1,12 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace StudentTracker
@@ -25,67 +19,42 @@ namespace StudentTracker
         {
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
-                try
-                {
-                    conn.Open();
-                    string sql = "SELECT Id, Name FROM Groups";
-                    SqlDataAdapter adapter = new SqlDataAdapter(sql, conn);
-                    DataTable dt = new DataTable();
-                    adapter.Fill(dt);
+                DataTable result = DataBaseManager.GetAllGroups();
+                if (result == null) return;
 
-                    GroupList.DataSource = dt;
-                    GroupList.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+                // Загрузка данных в таблицу в форме
+                GroupList.DataSource = result;
+                // Авто подбор ширины слобцов
+                GroupList.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+                // Режим только для чтения
+                GroupList.ReadOnly = true;
+                // Убирает нижнюю пустую строку
+                GroupList.AllowUserToAddRows = false;
 
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show($"Ошибка: {ex.Message}");
-                }
             }
         }
 
         private void btnAddGroup_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(GroupNameInput.Text)) return;
+            errorProviderAddGroup.Clear();
 
-            using (SqlConnection conn = new SqlConnection(connectionString))
+            if (string.IsNullOrWhiteSpace(GroupNameInput.Text))
             {
-                conn.Open();
-                string checkGroup = "SELECT COUNT(*) FROM Groups WHERE Name = @Name";
-
-                using (SqlCommand command = new SqlCommand(checkGroup, conn))
-                {
-                    command.Parameters.AddWithValue("@Name", GroupNameInput.Text.Trim());
-
-                    if ((int)command.ExecuteScalar() > 0)
-                    {
-                        MessageBox.Show("Такая группа уже существует!");
-                        return;
-                    }
-                }
-
-                string sql = "INSERT INTO Groups (Name) VALUES (@Name)";
-
-                try
-                {
-                    using (SqlCommand command = new SqlCommand(sql, conn))
-                    {
-                        command.Parameters.AddWithValue("@Name", GroupNameInput.Text.Trim());
-                        command.ExecuteNonQuery();
-                        LoadData();
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show($"Ошибка: {ex.Message}", "Ошибка", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
-                }
-
-                
+                errorProviderAddGroup.SetError(GroupNameInput, "Введите название группы!");
+                return;
             }
-            this.DialogResult = DialogResult.OK;
-            this.Close();
+            if (SpecialityComboBoxInput.SelectedValue == null)
+            {
+                errorProviderAddGroup.SetError(SpecialityComboBoxInput, "Выберите направление!");
+                return;
+            }
+
+            DataBaseManager.AddGroup(GroupNameInput, SpecialityComboBoxInput);
+            LoadData();
         }
 
+
+        // Удалить от сюда, будет отдельная форма для удаления
         private void btnDeleteGroup_Click(object sender, EventArgs e)
         {
             if (GroupList.CurrentRow == null) return;

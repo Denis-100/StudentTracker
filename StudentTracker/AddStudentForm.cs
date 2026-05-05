@@ -1,18 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace StudentTracker
 {
     public partial class AddStudentForm : Form
     {
+        public event Action OnStudentAdd;
         private string connectionString = DatabaseInitializer.getConnectionString();
 
         public AddStudentForm()
@@ -41,34 +36,28 @@ namespace StudentTracker
         {
             if (!IsValid()) return;
 
-            try
+            bool result = DataBaseManager.AddStudent(
+                SurNameInput.Text.Trim(),
+                NameInput.Text.Trim(),
+                LastNameInput.Text.Trim(),
+                BirthDateInput.Text.Trim(),
+                PhoneInput.Text.Trim(),
+                EmailInput.Text.Trim(),
+                (int)GroupInput.SelectedValue
+                );
+
+            if (result)
             {
-                using (SqlConnection conn = new SqlConnection(connectionString))
-                {
-                    conn.Open();
-                    string sql = "INSERT INTO Students (SurName, Name, LastName, IdGroup)" +
-                        "VALUES (@SurName, @Name, @LastName, @IdGroup)";
+                MessageBox.Show("Студент добавлен!");
+                OnStudentAdd?.Invoke();
 
-                    using (SqlCommand command = new SqlCommand(sql, conn))
-                    {
-                        command.Parameters.AddWithValue("@SurName", SurNameInput.Text.Trim());
-                        command.Parameters.AddWithValue("@Name", NameInput.Text.Trim());
-                        command.Parameters.AddWithValue("@LastName", LastNameInput.Text.Trim());
-                        command.Parameters.AddWithValue("@IdGroup", GroupInput.SelectedValue);
-
-                        command.ExecuteNonQuery();
-                    }
-
-                }
-                LoadGroups();
-                MessageBox.Show("Студент успешно добавлен!");
+                SurNameInput.Clear();
+                NameInput.Clear();
+                LastNameInput.Clear();
+                BirthDateInput.Clear();
+                PhoneInput.Clear();
+                EmailInput.Clear();
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Ошибка при добавлении студента: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-
-            
         }
 
         private bool IsValid()
@@ -85,6 +74,30 @@ namespace StudentTracker
             if (string.IsNullOrWhiteSpace(NameInput.Text))
             {
                 errorProvider.SetError(NameInput, "Введите имя!");
+                result = false;
+            }
+            
+            if (string.IsNullOrWhiteSpace(BirthDateInput.Text))
+            {
+                errorProvider.SetError(BirthDateInput, "Введите дату рождения!");
+                result = false;
+            }
+            
+            if (string.IsNullOrWhiteSpace(PhoneInput.Text))
+            {
+                errorProvider.SetError(PhoneInput, "Введите телефон!");
+                result = false;
+            }
+            
+            if (string.IsNullOrWhiteSpace(PhoneInput.Text))
+            {
+                errorProvider.SetError(PhoneInput, "Введите телефон!");
+                result = false;
+            }
+            
+            if (string.IsNullOrWhiteSpace(EmailInput.Text))
+            {
+                errorProvider.SetError(EmailInput, "Введите почту!");
                 result = false;
             }
 
