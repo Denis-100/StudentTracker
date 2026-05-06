@@ -196,6 +196,7 @@
             this.Controls.Add(this.NameInput);
             this.Controls.Add(this.SurNameInput);
             this.Name = "AddStudentForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = " Добавить студента";
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             this.ResumeLayout(false);

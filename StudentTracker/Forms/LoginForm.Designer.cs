@@ -30,11 +30,12 @@
         {
             this.components = new System.ComponentModel.Container();
             this.LoginInput = new System.Windows.Forms.TextBox();
-            this.PassordInput = new System.Windows.Forms.TextBox();
+            this.PasswordInput = new System.Windows.Forms.TextBox();
             this.btn_Authorization = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.errorProviderLogin = new System.Windows.Forms.ErrorProvider(this.components);
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.errorProviderLogin)).BeginInit();
             this.SuspendLayout();
             // 
@@ -46,13 +47,13 @@
             this.LoginInput.Size = new System.Drawing.Size(158, 20);
             this.LoginInput.TabIndex = 0;
             // 
-            // PassordInput
+            // PasswordInput
             // 
-            this.PassordInput.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.PassordInput.Location = new System.Drawing.Point(55, 107);
-            this.PassordInput.Name = "PassordInput";
-            this.PassordInput.Size = new System.Drawing.Size(158, 20);
-            this.PassordInput.TabIndex = 1;
+            this.PasswordInput.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.PasswordInput.Location = new System.Drawing.Point(55, 107);
+            this.PasswordInput.Name = "PasswordInput";
+            this.PasswordInput.Size = new System.Drawing.Size(158, 20);
+            this.PasswordInput.TabIndex = 1;
             // 
             // btn_Authorization
             // 
@@ -89,15 +90,30 @@
             // 
             this.errorProviderLogin.ContainerControl = this;
             // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.button1.BackgroundImage = global::StudentTracker.Properties.Resources.eye_14618401;
+            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.button1.Location = new System.Drawing.Point(219, 99);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(35, 35);
+            this.button1.TabIndex = 5;
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // LoginForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(266, 250);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btn_Authorization);
-            this.Controls.Add(this.PassordInput);
+            this.Controls.Add(this.PasswordInput);
             this.Controls.Add(this.LoginInput);
             this.Name = "LoginForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -111,10 +127,11 @@
         #endregion
 
         private System.Windows.Forms.TextBox LoginInput;
-        private System.Windows.Forms.TextBox PassordInput;
+        private System.Windows.Forms.TextBox PasswordInput;
         private System.Windows.Forms.Button btn_Authorization;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ErrorProvider errorProviderLogin;
+        private System.Windows.Forms.Button button1;
     }
 }

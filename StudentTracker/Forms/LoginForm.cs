@@ -10,14 +10,14 @@ namespace StudentTracker
         public LoginForm()
         {
             InitializeComponent();
-            PassordInput.UseSystemPasswordChar = true;
+            PasswordInput.UseSystemPasswordChar = true;
         }
 
         private void btn_Authorization_Click(object sender, EventArgs e)
         {
             if (!IsValid()) return;
 
-            string enterPassword = SecurityHelper.HashPassword(PassordInput.Text);
+            string enterPassword = SecurityHelper.HashPassword(PasswordInput.Text);
 
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
@@ -53,13 +53,18 @@ namespace StudentTracker
                 result = false;
             }
 
-            if (string.IsNullOrWhiteSpace(PassordInput.Text))
+            if (string.IsNullOrWhiteSpace(PasswordInput.Text))
             {
-                errorProviderLogin.SetError(PassordInput, "Введите пароль!");
+                errorProviderLogin.SetError(PasswordInput, "Введите пароль!");
                 result = false;
             }
 
             return result;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            PasswordInput.UseSystemPasswordChar = !PasswordInput.UseSystemPasswordChar;
         }
     }
 }

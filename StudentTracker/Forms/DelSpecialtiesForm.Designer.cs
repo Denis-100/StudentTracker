@@ -38,17 +38,18 @@
             this.dgvSpecialtiesDel.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
             this.dgvSpecialtiesDel.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvSpecialtiesDel.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvSpecialtiesDel.Location = new System.Drawing.Point(12, 12);
+            this.dgvSpecialtiesDel.Dock = System.Windows.Forms.DockStyle.Left;
+            this.dgvSpecialtiesDel.Location = new System.Drawing.Point(0, 0);
             this.dgvSpecialtiesDel.Name = "dgvSpecialtiesDel";
             this.dgvSpecialtiesDel.RowHeadersVisible = false;
-            this.dgvSpecialtiesDel.Size = new System.Drawing.Size(195, 150);
+            this.dgvSpecialtiesDel.Size = new System.Drawing.Size(237, 246);
             this.dgvSpecialtiesDel.TabIndex = 1;
             // 
             // btnDelSpeciltiesForm
             // 
-            this.btnDelSpeciltiesForm.Location = new System.Drawing.Point(213, 139);
+            this.btnDelSpeciltiesForm.Location = new System.Drawing.Point(248, 198);
             this.btnDelSpeciltiesForm.Name = "btnDelSpeciltiesForm";
-            this.btnDelSpeciltiesForm.Size = new System.Drawing.Size(75, 23);
+            this.btnDelSpeciltiesForm.Size = new System.Drawing.Size(117, 36);
             this.btnDelSpeciltiesForm.TabIndex = 2;
             this.btnDelSpeciltiesForm.Text = "Удалить";
             this.btnDelSpeciltiesForm.UseVisualStyleBackColor = true;
@@ -58,7 +59,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(325, 249);
+            this.ClientSize = new System.Drawing.Size(377, 246);
             this.Controls.Add(this.btnDelSpeciltiesForm);
             this.Controls.Add(this.dgvSpecialtiesDel);
             this.Name = "DelSpecialtiesForm";

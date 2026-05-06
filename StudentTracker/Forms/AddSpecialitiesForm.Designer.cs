@@ -43,23 +43,24 @@
             this.dgvSpecialtiesAdd.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
             this.dgvSpecialtiesAdd.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvSpecialtiesAdd.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvSpecialtiesAdd.Location = new System.Drawing.Point(12, 12);
+            this.dgvSpecialtiesAdd.Dock = System.Windows.Forms.DockStyle.Left;
+            this.dgvSpecialtiesAdd.Location = new System.Drawing.Point(0, 0);
             this.dgvSpecialtiesAdd.Name = "dgvSpecialtiesAdd";
             this.dgvSpecialtiesAdd.RowHeadersVisible = false;
-            this.dgvSpecialtiesAdd.Size = new System.Drawing.Size(195, 150);
+            this.dgvSpecialtiesAdd.Size = new System.Drawing.Size(237, 246);
             this.dgvSpecialtiesAdd.TabIndex = 0;
             // 
             // SpecialtiNameInput
             // 
-            this.SpecialtiNameInput.Location = new System.Drawing.Point(213, 172);
+            this.SpecialtiNameInput.Location = new System.Drawing.Point(246, 174);
             this.SpecialtiNameInput.Name = "SpecialtiNameInput";
-            this.SpecialtiNameInput.Size = new System.Drawing.Size(100, 20);
+            this.SpecialtiNameInput.Size = new System.Drawing.Size(117, 20);
             this.SpecialtiNameInput.TabIndex = 1;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(210, 156);
+            this.label1.Location = new System.Drawing.Point(243, 158);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(57, 13);
             this.label1.TabIndex = 2;
@@ -67,9 +68,9 @@
             // 
             // btnAddSpecialies
             // 
-            this.btnAddSpecialies.Location = new System.Drawing.Point(213, 198);
+            this.btnAddSpecialies.Location = new System.Drawing.Point(246, 200);
             this.btnAddSpecialies.Name = "btnAddSpecialies";
-            this.btnAddSpecialies.Size = new System.Drawing.Size(100, 36);
+            this.btnAddSpecialies.Size = new System.Drawing.Size(117, 36);
             this.btnAddSpecialies.TabIndex = 3;
             this.btnAddSpecialies.Text = "Добавить";
             this.btnAddSpecialies.UseVisualStyleBackColor = true;
@@ -83,7 +84,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(342, 246);
+            this.ClientSize = new System.Drawing.Size(378, 246);
             this.Controls.Add(this.btnAddSpecialies);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.SpecialtiNameInput);
