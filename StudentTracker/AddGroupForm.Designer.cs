@@ -45,7 +45,7 @@
             // 
             this.GroupNameInput.Location = new System.Drawing.Point(355, 49);
             this.GroupNameInput.Name = "GroupNameInput";
-            this.GroupNameInput.Size = new System.Drawing.Size(100, 20);
+            this.GroupNameInput.Size = new System.Drawing.Size(130, 20);
             this.GroupNameInput.TabIndex = 0;
             // 
             // label1
@@ -99,7 +99,7 @@
             this.SpecialityComboBoxInput.FormattingEnabled = true;
             this.SpecialityComboBoxInput.Location = new System.Drawing.Point(355, 96);
             this.SpecialityComboBoxInput.Name = "SpecialityComboBoxInput";
-            this.SpecialityComboBoxInput.Size = new System.Drawing.Size(100, 21);
+            this.SpecialityComboBoxInput.Size = new System.Drawing.Size(130, 21);
             this.SpecialityComboBoxInput.TabIndex = 7;
             // 
             // errorProviderAddGroup

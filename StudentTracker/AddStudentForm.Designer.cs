@@ -137,11 +137,11 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(9, 84);
+            this.label5.Location = new System.Drawing.Point(12, 71);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(86, 13);
+            this.label5.Size = new System.Drawing.Size(89, 26);
             this.label5.TabIndex = 10;
-            this.label5.Text = "Дата рождения";
+            this.label5.Text = "Дата рождения \r\nгггг-мм-дд";
             // 
             // PhoneInput
             // 

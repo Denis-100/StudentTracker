@@ -7,8 +7,8 @@ namespace StudentTracker
 {
     public partial class AddGroupForm : Form
     {
+        public event Action OnGroupChange;
         private string connectionString = DatabaseInitializer.getConnectionString();
-
         public AddGroupForm()
         {
             InitializeComponent();
@@ -21,6 +21,12 @@ namespace StudentTracker
             {
                 DataTable result = DataBaseManager.GetAllGroups();
                 if (result == null) return;
+
+                DataTable dtSpecilties = DataBaseManager.GetAllSpecialties();
+
+                SpecialityComboBoxInput.DataSource = dtSpecilties;
+                SpecialityComboBoxInput.ValueMember = "Id";
+                SpecialityComboBoxInput.DisplayMember = "Название";
 
                 // Загрузка данных в таблицу в форме
                 GroupList.DataSource = result;
@@ -50,6 +56,7 @@ namespace StudentTracker
             }
 
             DataBaseManager.AddGroup(GroupNameInput, SpecialityComboBoxInput);
+            OnGroupChange?.Invoke();
             LoadData();
         }
 
@@ -60,7 +67,7 @@ namespace StudentTracker
             if (GroupList.CurrentRow == null) return;
 
             int groupId = Convert.ToInt32(GroupList.CurrentRow.Cells["Id"].Value);
-            string groupName = GroupList.CurrentRow.Cells["Name"].Value.ToString();
+            string groupName = GroupList.CurrentRow.Cells["Название"].Value.ToString();
 
             var confirm = MessageBox.Show($"Удалить группу: '{groupName}'?\nВсе студенты этой группы так же удаляться.", 
                 "Подтверждение", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
@@ -76,9 +83,10 @@ namespace StudentTracker
                     {
                         command.Parameters.AddWithValue("@Id", groupId);
                         command.ExecuteNonQuery();
+                        OnGroupChange?.Invoke();
+                        LoadData();
                     }
                 }
-                LoadData();
             }
         }
     }

@@ -19,21 +19,23 @@ namespace StudentTracker
         // Метод загрузка данных из базы данных
         private void LoadData()
         {
-                try
-                {
-                    // Загрузка данных в таблицу в форме
-                    dgvStudents.DataSource = DataBaseManager.GetAllStudents();
-                    // Авто подбор ширины слобцов
-                    dgvStudents.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
-                    // Режим только для чтения
-                    dgvStudents.ReadOnly = true;
-                    // Убирает нижнюю пустую строку
-                    dgvStudents.AllowUserToAddRows = false;
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show($"Ошибка: {ex.Message}");
-                }
+            try
+            {
+                // Загрузка данных в таблицу в форме
+                dgvStudents.DataSource = DataBaseManager.GetAllStudents();
+                // Авто подбор ширины слобцов
+                dgvStudents.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+                // Режим только для чтения
+                dgvStudents.ReadOnly = true;
+                // Убирает нижнюю пустую строку
+                dgvStudents.AllowUserToAddRows = false;
+                // Выделяет всю строку сразу при нажатии на ячейку
+                dgvStudents.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка: {ex.Message}");
+            }
             
         }
 
@@ -48,7 +50,9 @@ namespace StudentTracker
             }
         }
 
-        private void toolStripButton1_Click(object sender, EventArgs e)
+
+
+        private void btn_refresh_Click(object sender, EventArgs e)
         {
             LoadData();
         }
@@ -63,10 +67,21 @@ namespace StudentTracker
         private void группаToolStripMenuItem_Click(object sender, EventArgs e)
         {
             AddGroupForm addForm = new AddGroupForm();
-            if (addForm.ShowDialog() == DialogResult.OK)
-            {
-                LoadData();
-            }
+            addForm.OnGroupChange += () => LoadData();
+            addForm.ShowDialog();
+        }
+
+        private void направлениеХToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AddSpecialitiesForm addForm = new AddSpecialitiesForm();
+            addForm.ShowDialog();
+        }
+
+        private void направлениеToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DelSpecialtiesForm delSpecialtiesForm = new DelSpecialtiesForm();
+            delSpecialtiesForm.OnDelSpecilties += () => LoadData();
+            delSpecialtiesForm.ShowDialog();
         }
     }
 }

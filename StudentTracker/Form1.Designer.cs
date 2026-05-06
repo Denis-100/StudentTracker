@@ -32,9 +32,10 @@
             this.dgvStudents = new System.Windows.Forms.DataGridView();
             this.btnDelete = new System.Windows.Forms.Button();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.toolStripButton1 = new System.Windows.Forms.ToolStripLabel();
+            this.btn_refresh = new System.Windows.Forms.ToolStripButton();
             this.toolStripDropDownButton3 = new System.Windows.Forms.ToolStripDropDownButton();
             this.пользователейToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.учителейToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.направленийХToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.группToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.студентовToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -45,12 +46,12 @@
             this.учителяToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.студентаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.оценкуToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.направлениеХToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripDropDownButton4 = new System.Windows.Forms.ToolStripDropDownButton();
             this.toolStripDropDownButton2 = new System.Windows.Forms.ToolStripDropDownButton();
             this.студентаToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.группуToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.учителейToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripDropDownButton4 = new System.Windows.Forms.ToolStripDropDownButton();
-            this.направлениеХToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.направлениеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dgvStudents)).BeginInit();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -60,6 +61,7 @@
             this.dgvStudents.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.dgvStudents.Location = new System.Drawing.Point(0, 28);
             this.dgvStudents.Name = "dgvStudents";
+            this.dgvStudents.RowHeadersVisible = false;
             this.dgvStudents.Size = new System.Drawing.Size(800, 422);
             this.dgvStudents.TabIndex = 3;
             // 
@@ -76,10 +78,10 @@
             // toolStrip1
             // 
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripButton1,
+            this.btn_refresh,
             this.toolStripDropDownButton3,
-            this.toolStripDropDownButton1,
             this.toolStripDropDownButton4,
+            this.toolStripDropDownButton1,
             this.toolStripDropDownButton2});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
@@ -87,15 +89,15 @@
             this.toolStrip1.TabIndex = 6;
             this.toolStrip1.Text = "toolStrip1";
             // 
-            // toolStripButton1
+            // btn_refresh
             // 
-            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
-            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton1.Name = "toolStripButton1";
-            this.toolStripButton1.Size = new System.Drawing.Size(61, 22);
-            this.toolStripButton1.Text = "Обновить";
-            this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
+            this.btn_refresh.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.btn_refresh.Image = ((System.Drawing.Image)(resources.GetObject("btn_refresh.Image")));
+            this.btn_refresh.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btn_refresh.Name = "btn_refresh";
+            this.btn_refresh.Size = new System.Drawing.Size(65, 22);
+            this.btn_refresh.Text = "Обновить";
+            this.btn_refresh.Click += new System.EventHandler(this.btn_refresh_Click);
             // 
             // toolStripDropDownButton3
             // 
@@ -117,48 +119,54 @@
             // пользователейToolStripMenuItem
             // 
             this.пользователейToolStripMenuItem.Name = "пользователейToolStripMenuItem";
-            this.пользователейToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.пользователейToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
             this.пользователейToolStripMenuItem.Text = "Пользователей (Х)";
+            // 
+            // учителейToolStripMenuItem
+            // 
+            this.учителейToolStripMenuItem.Name = "учителейToolStripMenuItem";
+            this.учителейToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
+            this.учителейToolStripMenuItem.Text = "Учителей (Х)";
             // 
             // направленийХToolStripMenuItem
             // 
             this.направленийХToolStripMenuItem.Name = "направленийХToolStripMenuItem";
-            this.направленийХToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.направленийХToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
             this.направленийХToolStripMenuItem.Text = "Направлений (Х)";
             // 
             // группToolStripMenuItem
             // 
             this.группToolStripMenuItem.Name = "группToolStripMenuItem";
-            this.группToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.группToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
             this.группToolStripMenuItem.Text = "Групп (Х)";
             // 
             // студентовToolStripMenuItem
             // 
             this.студентовToolStripMenuItem.Name = "студентовToolStripMenuItem";
-            this.студентовToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.студентовToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
             this.студентовToolStripMenuItem.Text = "Студентов (Х)";
             // 
             // предметовToolStripMenuItem
             // 
             this.предметовToolStripMenuItem.Name = "предметовToolStripMenuItem";
-            this.предметовToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.предметовToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
             this.предметовToolStripMenuItem.Text = "Предметов (Х)";
             // 
             // оценокToolStripMenuItem
             // 
             this.оценокToolStripMenuItem.Name = "оценокToolStripMenuItem";
-            this.оценокToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.оценокToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
             this.оценокToolStripMenuItem.Text = "Оценок (Х)";
             // 
             // toolStripDropDownButton1
             // 
             this.toolStripDropDownButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.toolStripDropDownButton1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.направлениеХToolStripMenuItem,
             this.группаToolStripMenuItem,
             this.учителяToolStripMenuItem,
             this.студентаToolStripMenuItem,
-            this.оценкуToolStripMenuItem,
-            this.направлениеХToolStripMenuItem});
+            this.оценкуToolStripMenuItem});
             this.toolStripDropDownButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripDropDownButton1.Image")));
             this.toolStripDropDownButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripDropDownButton1.Name = "toolStripDropDownButton1";
@@ -176,7 +184,7 @@
             // 
             this.учителяToolStripMenuItem.Name = "учителяToolStripMenuItem";
             this.учителяToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.учителяToolStripMenuItem.Text = "Учителя ()";
+            this.учителяToolStripMenuItem.Text = "Учителя (Х)";
             // 
             // студентаToolStripMenuItem
             // 
@@ -191,10 +199,27 @@
             this.оценкуToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.оценкуToolStripMenuItem.Text = "Оценку (Х)";
             // 
+            // направлениеХToolStripMenuItem
+            // 
+            this.направлениеХToolStripMenuItem.Name = "направлениеХToolStripMenuItem";
+            this.направлениеХToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.направлениеХToolStripMenuItem.Text = "Направление";
+            this.направлениеХToolStripMenuItem.Click += new System.EventHandler(this.направлениеХToolStripMenuItem_Click);
+            // 
+            // toolStripDropDownButton4
+            // 
+            this.toolStripDropDownButton4.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolStripDropDownButton4.Image = ((System.Drawing.Image)(resources.GetObject("toolStripDropDownButton4.Image")));
+            this.toolStripDropDownButton4.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripDropDownButton4.Name = "toolStripDropDownButton4";
+            this.toolStripDropDownButton4.Size = new System.Drawing.Size(86, 22);
+            this.toolStripDropDownButton4.Text = "Сортировка";
+            // 
             // toolStripDropDownButton2
             // 
             this.toolStripDropDownButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.toolStripDropDownButton2.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.направлениеToolStripMenuItem,
             this.студентаToolStripMenuItem1,
             this.группуToolStripMenuItem});
             this.toolStripDropDownButton2.Image = ((System.Drawing.Image)(resources.GetObject("toolStripDropDownButton2.Image")));
@@ -206,35 +231,21 @@
             // студентаToolStripMenuItem1
             // 
             this.студентаToolStripMenuItem1.Name = "студентаToolStripMenuItem1";
-            this.студентаToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.студентаToolStripMenuItem1.Size = new System.Drawing.Size(141, 22);
             this.студентаToolStripMenuItem1.Text = "Студента (Х)";
             // 
             // группуToolStripMenuItem
             // 
             this.группуToolStripMenuItem.Name = "группуToolStripMenuItem";
-            this.группуToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.группуToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
             this.группуToolStripMenuItem.Text = "Группу (Х)";
             // 
-            // учителейToolStripMenuItem
+            // направлениеToolStripMenuItem
             // 
-            this.учителейToolStripMenuItem.Name = "учителейToolStripMenuItem";
-            this.учителейToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.учителейToolStripMenuItem.Text = "Учителей (Х)";
-            // 
-            // toolStripDropDownButton4
-            // 
-            this.toolStripDropDownButton4.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.toolStripDropDownButton4.Image = ((System.Drawing.Image)(resources.GetObject("toolStripDropDownButton4.Image")));
-            this.toolStripDropDownButton4.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripDropDownButton4.Name = "toolStripDropDownButton4";
-            this.toolStripDropDownButton4.Size = new System.Drawing.Size(86, 22);
-            this.toolStripDropDownButton4.Text = "Сортировка";
-            // 
-            // направлениеХToolStripMenuItem
-            // 
-            this.направлениеХToolStripMenuItem.Name = "направлениеХToolStripMenuItem";
-            this.направлениеХToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.направлениеХToolStripMenuItem.Text = "Направление (Х)";
+            this.направлениеToolStripMenuItem.Name = "направлениеToolStripMenuItem";
+            this.направлениеToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.направлениеToolStripMenuItem.Text = "Направление";
+            this.направлениеToolStripMenuItem.Click += new System.EventHandler(this.направлениеToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -268,7 +279,6 @@
         private System.Windows.Forms.ToolStripMenuItem студентаToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem группуToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem учителяToolStripMenuItem;
-        private System.Windows.Forms.ToolStripLabel toolStripButton1;
         private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownButton3;
         private System.Windows.Forms.ToolStripMenuItem пользователейToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem направленийХToolStripMenuItem;
@@ -279,6 +289,8 @@
         private System.Windows.Forms.ToolStripMenuItem учителейToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem направлениеХToolStripMenuItem;
         private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownButton4;
+        private System.Windows.Forms.ToolStripButton btn_refresh;
+        private System.Windows.Forms.ToolStripMenuItem направлениеToolStripMenuItem;
     }
 }
 

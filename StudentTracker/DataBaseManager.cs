@@ -20,12 +20,14 @@ s.SurName + ' ' + s.Name + ' ' + s.LastName AS [ФИО],
 s.BirthDate AS [Дата рождения],
 s.Phone AS [Телефон],
 s.Email AS [Почта],
+spec.Name AS [Направление],
 g.Name AS [Группа],
 ROUND(AVG(CAST(grd.Grade AS FLOAT)), 2) AS [Ср. Балл]
 FROM Students as s
 JOIN Groups AS g ON s.IdGroup = g.Id
 LEFT JOIN Grades AS grd ON grd.IdStudent = s.Id
-GROUP BY s.Id, s.SurName, s.Name, s.LastName, s.BirthDate, s.Phone, s.Email, g.Name";
+JOIN Specialties AS spec ON g.IdSpecialty = spec.Id
+GROUP BY s.Id, s.SurName, s.Name, s.LastName, s.BirthDate, s.Phone, s.Email, spec.Name, g.Name";
 
             SqlDataAdapter adapter = new SqlDataAdapter(sql, conn);
             DataTable dt = new DataTable();
@@ -177,6 +179,111 @@ GROUP BY s.Id, s.SurName, s.Name, s.LastName, s.BirthDate, s.Phone, s.Email, g.N
     }
     //
     // Группы
+    //
+    //
+    // Направления (Специальности)
+    //
+    public static DataTable GetAllSpecialties()
+    {
+        try
+        {
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+                string sql = "SELECT Id, Name AS [Название] FROM Specialties";
+
+                SqlDataAdapter adapter = new SqlDataAdapter(sql, conn);
+                DataTable dt = new DataTable();
+                adapter.Fill(dt);
+                return dt;
+            }
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show($"Возникла ошибка при загрузке всех направлений: {ex.Message}",
+                "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            return null;
+        }
+    }
+
+    public static bool AddSpecialties(TextBox nameSpecilties)
+    {
+        try
+        {
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+
+                string sqlCheck = "SELECT TOP 1 1 FROM Specialties WHERE Name = @Name";
+                using (SqlCommand cmd = new SqlCommand(sqlCheck, conn))
+                {
+                    cmd.Parameters.AddWithValue("@Name", nameSpecilties.Text.Trim());
+                    var result = cmd.ExecuteScalar();
+                    
+                    if (result != null)
+                    {
+                        MessageBox.Show("Такое направление уже существует!", "Ошибка",
+                            MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return false;
+                    }
+                }
+
+                string sql = "INSERT INTO Specialties (Name) VALUES (@Name)";
+
+                using (SqlCommand cmd = new SqlCommand(sql, conn))
+                {
+                    cmd.Parameters.AddWithValue("@Name", nameSpecilties.Text.Trim());
+                    cmd.ExecuteNonQuery();
+                    return true;
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show($"Возникла ошибка при добавлении направления: {ex.Message}",
+                "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            return false;
+        }
+    }
+
+    public static bool DelSpecilties(DataGridView dgvSpecilties)
+    {
+        try
+        {
+            int id = Convert.ToInt32(dgvSpecilties.CurrentRow.Cells["Id"].Value);
+            string nameSpec = dgvSpecilties.CurrentRow.Cells["Название"].Value.ToString().Trim();
+
+            var confirm = MessageBox.Show($"Удалить направление: '{nameSpec}'?\nВсе группы и студенты этих группы удаляться.",
+                "Подтверждение", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (confirm == DialogResult.Yes)
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+
+                    string sql = "DELETE Specialties WHERE Id = @Id";
+
+                    using (SqlCommand cmd = new SqlCommand(sql, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@Id", id);
+                        cmd.ExecuteNonQuery();
+                        return true;
+                    }
+                }
+            }
+            
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show($"Возникла ошибка при удалении направления: {ex.Message}",
+                "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            return false;
+        }
+        return false;
+    }
+    //
+    // Направления (Специальности)
     //
 }
 

@@ -73,7 +73,7 @@ public static class DatabaseInitializer
                             CREATE TABLE Groups(
                                 Id INT PRIMARY KEY IDENTITY,
                                 Name NVARCHAR(50) NOT NULL,
-                                IdSpecialty INT REFERENCES Specialties(Id)
+                                IdSpecialty INT REFERENCES Specialties(Id) ON DELETE CASCADE
                             )
 
                             IF NOT EXISTS (SELECT * FROM sys.tables WHERE name = 'Students')

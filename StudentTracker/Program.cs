@@ -10,7 +10,7 @@ namespace StudentTracker
     {
         /// <summary>
         /// Главная точка входа для приложения.
-        /// </summary>
+        /// </summary>  
         [STAThread]
         static void Main()
         {
@@ -20,6 +20,8 @@ namespace StudentTracker
             DatabaseInitializer.Init();
 
             Application.Run(new Form1());
+
+
             //LoginForm login = new LoginForm();
             //if (login.ShowDialog() == DialogResult.OK)
             //{

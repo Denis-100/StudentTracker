@@ -41,25 +41,25 @@
             // LoginInput
             // 
             this.LoginInput.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.LoginInput.Location = new System.Drawing.Point(26, 29);
+            this.LoginInput.Location = new System.Drawing.Point(55, 35);
             this.LoginInput.Name = "LoginInput";
-            this.LoginInput.Size = new System.Drawing.Size(152, 20);
+            this.LoginInput.Size = new System.Drawing.Size(158, 20);
             this.LoginInput.TabIndex = 0;
             // 
             // PassordInput
             // 
             this.PassordInput.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.PassordInput.Location = new System.Drawing.Point(26, 101);
+            this.PassordInput.Location = new System.Drawing.Point(55, 107);
             this.PassordInput.Name = "PassordInput";
-            this.PassordInput.Size = new System.Drawing.Size(152, 20);
+            this.PassordInput.Size = new System.Drawing.Size(158, 20);
             this.PassordInput.TabIndex = 1;
             // 
             // btn_Authorization
             // 
             this.btn_Authorization.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_Authorization.Location = new System.Drawing.Point(50, 159);
+            this.btn_Authorization.Location = new System.Drawing.Point(70, 160);
             this.btn_Authorization.Name = "btn_Authorization";
-            this.btn_Authorization.Size = new System.Drawing.Size(102, 30);
+            this.btn_Authorization.Size = new System.Drawing.Size(119, 30);
             this.btn_Authorization.TabIndex = 2;
             this.btn_Authorization.Text = "Авторизоваться";
             this.btn_Authorization.UseVisualStyleBackColor = true;
@@ -69,7 +69,7 @@
             // 
             this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(26, 13);
+            this.label1.Location = new System.Drawing.Point(55, 19);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(38, 13);
             this.label1.TabIndex = 3;
@@ -79,7 +79,7 @@
             // 
             this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(26, 85);
+            this.label2.Location = new System.Drawing.Point(55, 91);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(45, 13);
             this.label2.TabIndex = 4;
@@ -93,7 +93,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(205, 250);
+            this.ClientSize = new System.Drawing.Size(266, 250);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btn_Authorization);
