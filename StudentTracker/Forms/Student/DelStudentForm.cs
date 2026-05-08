@@ -1,4 +1,5 @@
-﻿using System;
+﻿using StudentTracker.Services;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -18,16 +19,14 @@ namespace StudentTracker.Forms
         {
             InitializeComponent();
             LoadData();
+            this.AcceptButton = btnDelStudent;
         }
 
         private void LoadData()
         {
             dgvStudentDel.DataSource = DataBaseManager.GetAllStudents();
 
-            dgvStudentDel.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
-            dgvStudentDel.ReadOnly = true;
-            dgvStudentDel.AllowUserToAddRows = false;
-            dgvStudentDel.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            SetDefaultDGVSettings.Default(dgvStudentDel);
         }
 
         private void btnDelStudent_Click(object sender, EventArgs e)

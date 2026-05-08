@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Data.SqlClient;
+using System.Drawing.Drawing2D;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace StudentTracker
@@ -11,6 +13,7 @@ namespace StudentTracker
         {
             InitializeComponent();
             PasswordInput.UseSystemPasswordChar = true;
+            this.AcceptButton = btn_Authorization;
         }
 
         private void btn_Authorization_Click(object sender, EventArgs e)

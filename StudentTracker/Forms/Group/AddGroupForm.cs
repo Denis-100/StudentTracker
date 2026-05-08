@@ -1,4 +1,5 @@
-﻿using System;
+﻿using StudentTracker.Services;
+using System;
 using System.Data;
 using System.Data.SqlClient;
 using System.Windows.Forms;
@@ -12,28 +13,29 @@ namespace StudentTracker
         {
             InitializeComponent();
             LoadData();
+            this.AcceptButton = btnGroupAdd;
         }
 
         private void LoadData()
         {
-            DataTable result = DataBaseManager.GetAllGroups();
-            if (result == null) return;
+            try
+            {
+                GroupListAdd.DataSource = DataBaseManager.GetAllGroups();
 
-            DataTable dtSpecilties = DataBaseManager.GetAllSpecialties();
+                DataTable dtSpecilties = DataBaseManager.GetAllSpecialties();
 
-            SpecialityComboBoxInput.DataSource = dtSpecilties;
-            SpecialityComboBoxInput.ValueMember = "Id";
-            SpecialityComboBoxInput.DisplayMember = "Название";
+                SpecialityComboBoxInput.DataSource = dtSpecilties;
+                SpecialityComboBoxInput.ValueMember = "Id";
+                SpecialityComboBoxInput.DisplayMember = "Название";
 
-            // Загрузка данных в таблицу в форме
-            GroupListAdd.DataSource = result;
-            // Авто подбор ширины слобцов
-            GroupListAdd.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
-            // Режим только для чтения
-            GroupListAdd.ReadOnly = true;
-            // Убирает нижнюю пустую строку
-            GroupListAdd.AllowUserToAddRows = false;
-
+                SetDefaultDGVSettings.Default(GroupListAdd);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка: {ex.Message}",
+                    "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
         }
 
         private void btnAddGroup_Click(object sender, EventArgs e)

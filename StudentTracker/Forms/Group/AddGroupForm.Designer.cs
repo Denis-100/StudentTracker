@@ -31,7 +31,7 @@
             this.components = new System.ComponentModel.Container();
             this.GroupNameInput = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.btnGroup = new System.Windows.Forms.Button();
+            this.btnGroupAdd = new System.Windows.Forms.Button();
             this.GroupListAdd = new System.Windows.Forms.DataGridView();
             this.label2 = new System.Windows.Forms.Label();
             this.SpecialityComboBoxInput = new System.Windows.Forms.ComboBox();
@@ -56,15 +56,15 @@
             this.label1.TabIndex = 1;
             this.label1.Text = "Название группы";
             // 
-            // btnGroup
+            // btnGroupAdd
             // 
-            this.btnGroup.Location = new System.Drawing.Point(304, 117);
-            this.btnGroup.Name = "btnGroup";
-            this.btnGroup.Size = new System.Drawing.Size(130, 35);
-            this.btnGroup.TabIndex = 2;
-            this.btnGroup.Text = "Добавить";
-            this.btnGroup.UseVisualStyleBackColor = true;
-            this.btnGroup.Click += new System.EventHandler(this.btnAddGroup_Click);
+            this.btnGroupAdd.Location = new System.Drawing.Point(304, 117);
+            this.btnGroupAdd.Name = "btnGroupAdd";
+            this.btnGroupAdd.Size = new System.Drawing.Size(130, 35);
+            this.btnGroupAdd.TabIndex = 2;
+            this.btnGroupAdd.Text = "Добавить";
+            this.btnGroupAdd.UseVisualStyleBackColor = true;
+            this.btnGroupAdd.Click += new System.EventHandler(this.btnAddGroup_Click);
             // 
             // GroupListAdd
             // 
@@ -107,7 +107,7 @@
             this.Controls.Add(this.SpecialityComboBoxInput);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.GroupListAdd);
-            this.Controls.Add(this.btnGroup);
+            this.Controls.Add(this.btnGroupAdd);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.GroupNameInput);
             this.Name = "AddGroupForm";
@@ -124,7 +124,7 @@
 
         private System.Windows.Forms.TextBox GroupNameInput;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button btnGroup;
+        private System.Windows.Forms.Button btnGroupAdd;
         private System.Windows.Forms.DataGridView GroupListAdd;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox SpecialityComboBoxInput;

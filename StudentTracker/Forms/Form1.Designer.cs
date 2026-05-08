@@ -47,6 +47,7 @@
             this.группаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.учителяToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.студентаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.предметToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.оценкуToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.типОценкиХToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripDropDownButton2 = new System.Windows.Forms.ToolStripDropDownButton();
@@ -54,6 +55,7 @@
             this.группуToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.учителяХToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.студентаToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.предметХToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.оценкуХToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.типОценкиХToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMain)).BeginInit();
@@ -184,6 +186,7 @@
             this.группаToolStripMenuItem,
             this.учителяToolStripMenuItem,
             this.студентаToolStripMenuItem,
+            this.предметToolStripMenuItem,
             this.оценкуToolStripMenuItem,
             this.типОценкиХToolStripMenuItem});
             this.toolStripDropDownButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripDropDownButton1.Image")));
@@ -195,41 +198,50 @@
             // направлениеХToolStripMenuItem
             // 
             this.направлениеХToolStripMenuItem.Name = "направлениеХToolStripMenuItem";
-            this.направлениеХToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
+            this.направлениеХToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.направлениеХToolStripMenuItem.Text = "Направление";
             this.направлениеХToolStripMenuItem.Click += new System.EventHandler(this.направлениеХToolStripMenuItem_Click);
             // 
             // группаToolStripMenuItem
             // 
             this.группаToolStripMenuItem.Name = "группаToolStripMenuItem";
-            this.группаToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
+            this.группаToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.группаToolStripMenuItem.Text = "Группу";
             this.группаToolStripMenuItem.Click += new System.EventHandler(this.группаToolStripMenuItem_Click);
             // 
             // учителяToolStripMenuItem
             // 
             this.учителяToolStripMenuItem.Name = "учителяToolStripMenuItem";
-            this.учителяToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
-            this.учителяToolStripMenuItem.Text = "Учителя (Х)";
+            this.учителяToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.учителяToolStripMenuItem.Text = "Учителя";
+            this.учителяToolStripMenuItem.Click += new System.EventHandler(this.учителяToolStripMenuItem_Click);
             // 
             // студентаToolStripMenuItem
             // 
             this.студентаToolStripMenuItem.Name = "студентаToolStripMenuItem";
-            this.студентаToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
+            this.студентаToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.студентаToolStripMenuItem.Text = "Студента";
             this.студентаToolStripMenuItem.Click += new System.EventHandler(this.студентаToolStripMenuItem_Click);
+            // 
+            // предметToolStripMenuItem
+            // 
+            this.предметToolStripMenuItem.Name = "предметToolStripMenuItem";
+            this.предметToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.предметToolStripMenuItem.Text = "Предмет";
+            this.предметToolStripMenuItem.Click += new System.EventHandler(this.предметToolStripMenuItem_Click);
             // 
             // оценкуToolStripMenuItem
             // 
             this.оценкуToolStripMenuItem.Name = "оценкуToolStripMenuItem";
-            this.оценкуToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
+            this.оценкуToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.оценкуToolStripMenuItem.Text = "Оценку (Х)";
             // 
             // типОценкиХToolStripMenuItem
             // 
             this.типОценкиХToolStripMenuItem.Name = "типОценкиХToolStripMenuItem";
-            this.типОценкиХToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
-            this.типОценкиХToolStripMenuItem.Text = "Тип оценки (Х)";
+            this.типОценкиХToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.типОценкиХToolStripMenuItem.Text = "Тип оценки";
+            this.типОценкиХToolStripMenuItem.Click += new System.EventHandler(this.типОценкиХToolStripMenuItem_Click);
             // 
             // toolStripDropDownButton2
             // 
@@ -239,6 +251,7 @@
             this.группуToolStripMenuItem,
             this.учителяХToolStripMenuItem,
             this.студентаToolStripMenuItem1,
+            this.предметХToolStripMenuItem,
             this.оценкуХToolStripMenuItem,
             this.типОценкиХToolStripMenuItem1});
             this.toolStripDropDownButton2.Image = ((System.Drawing.Image)(resources.GetObject("toolStripDropDownButton2.Image")));
@@ -250,41 +263,50 @@
             // направлениеToolStripMenuItem
             // 
             this.направлениеToolStripMenuItem.Name = "направлениеToolStripMenuItem";
-            this.направлениеToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.направлениеToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.направлениеToolStripMenuItem.Text = "Направление";
             this.направлениеToolStripMenuItem.Click += new System.EventHandler(this.направлениеToolStripMenuItem_Click);
             // 
             // группуToolStripMenuItem
             // 
             this.группуToolStripMenuItem.Name = "группуToolStripMenuItem";
-            this.группуToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.группуToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.группуToolStripMenuItem.Text = "Группу";
             this.группуToolStripMenuItem.Click += new System.EventHandler(this.группуToolStripMenuItem_Click);
             // 
             // учителяХToolStripMenuItem
             // 
             this.учителяХToolStripMenuItem.Name = "учителяХToolStripMenuItem";
-            this.учителяХToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.учителяХToolStripMenuItem.Text = "Учителя (Х)";
+            this.учителяХToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.учителяХToolStripMenuItem.Text = "Учителя";
+            this.учителяХToolStripMenuItem.Click += new System.EventHandler(this.учителяХToolStripMenuItem_Click);
             // 
             // студентаToolStripMenuItem1
             // 
             this.студентаToolStripMenuItem1.Name = "студентаToolStripMenuItem1";
-            this.студентаToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.студентаToolStripMenuItem1.Size = new System.Drawing.Size(148, 22);
             this.студентаToolStripMenuItem1.Text = "Студента";
             this.студентаToolStripMenuItem1.Click += new System.EventHandler(this.студентаToolStripMenuItem1_Click);
+            // 
+            // предметХToolStripMenuItem
+            // 
+            this.предметХToolStripMenuItem.Name = "предметХToolStripMenuItem";
+            this.предметХToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.предметХToolStripMenuItem.Text = "Предмет";
+            this.предметХToolStripMenuItem.Click += new System.EventHandler(this.предметХToolStripMenuItem_Click);
             // 
             // оценкуХToolStripMenuItem
             // 
             this.оценкуХToolStripMenuItem.Name = "оценкуХToolStripMenuItem";
-            this.оценкуХToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.оценкуХToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.оценкуХToolStripMenuItem.Text = "Оценку (Х)";
             // 
             // типОценкиХToolStripMenuItem1
             // 
             this.типОценкиХToolStripMenuItem1.Name = "типОценкиХToolStripMenuItem1";
-            this.типОценкиХToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
-            this.типОценкиХToolStripMenuItem1.Text = "Тип оценки (Х)";
+            this.типОценкиХToolStripMenuItem1.Size = new System.Drawing.Size(148, 22);
+            this.типОценкиХToolStripMenuItem1.Text = "Тип оценки";
+            this.типОценкиХToolStripMenuItem1.Click += new System.EventHandler(this.типОценкиХToolStripMenuItem1_Click);
             // 
             // Form1
             // 
@@ -333,6 +355,8 @@
         private System.Windows.Forms.ToolStripMenuItem учителяХToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem оценкуХToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem типОценкиХToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem предметToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem предметХToolStripMenuItem;
     }
 }
 

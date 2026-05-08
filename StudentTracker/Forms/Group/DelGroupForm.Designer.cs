@@ -64,7 +64,7 @@
             this.Controls.Add(this.GroupListDel);
             this.Name = "DelGroupForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "DelGroupForm";
+            this.Text = "Удалить группу";
             ((System.ComponentModel.ISupportInitialize)(this.GroupListDel)).EndInit();
             this.ResumeLayout(false);
 

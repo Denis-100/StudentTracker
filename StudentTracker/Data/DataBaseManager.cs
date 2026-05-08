@@ -1,17 +1,16 @@
-﻿using System;
+﻿using StudentTracker;
+using System;
+using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
 using System.Windows.Forms;
+using System.Xml.Linq;
 
 public static class DataBaseManager
 {
     private static string connectionString = DatabaseInitializer.getConnectionString();
 
-    //
-    // Пользователи
-    //
-
-    public static DataTable GetAllUsers()
+    private static DataTable GetAllMethod(string sql)
     {
         try
         {
@@ -19,8 +18,7 @@ public static class DataBaseManager
             {
                 conn.Open();
 
-                string sql = "SELECT * FROM Users";
-                SqlDataAdapter adapter = new SqlDataAdapter(sql ,conn);
+                SqlDataAdapter adapter = new SqlDataAdapter(sql, conn);
                 DataTable dt = new DataTable();
                 adapter.Fill(dt);
 
@@ -32,6 +30,16 @@ public static class DataBaseManager
             MessageBox.Show($"Ошибка: {ex.Message}");
             return null;
         }
+    }
+
+    //
+    // Пользователи
+    //
+
+    public static DataTable GetAllUsers()
+    {
+        string sql = "SELECT Id, Login, Password, Role, IdTeacher, IdStudent FROM Users";
+        return GetAllMethod(sql);
     }
 
     //
@@ -44,24 +52,145 @@ public static class DataBaseManager
 
     public static DataTable GetAllTeachers()
     {
+        
+        string sql = "SELECT Id," +
+                    "SurName AS [Фамилия]," +
+                    "Name AS [Имя]," +
+                    "LastName AS [Отчество] FROM Teachers";
+        return GetAllMethod(sql);
+    }
+
+    public static bool AddTeacher(string SurName, string Name, string LastName,
+        string Login, string Password)
+    {
         try
         {
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 conn.Open();
 
-                string sql = "SELECT * FROM Teachers";
-                SqlDataAdapter adapter = new SqlDataAdapter(sql, conn);
-                DataTable dt = new DataTable();
-                adapter.Fill(dt);
+                string sqlCheckLogin = "SELECT TOP 1 1 FROM Users WHERE Login = @Login";
+                using (SqlCommand cmd = new SqlCommand(sqlCheckLogin, conn))
+                {
+                    cmd.Parameters.AddWithValue("@Login", Login);
+                    var res = cmd.ExecuteScalar();
+                    if (res != null)
+                    {
+                        MessageBox.Show($"Логин занят!", "Ошибка",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return false;
+                    }
+                }
 
-                return dt;
+                string sqlCheck = "SELECT TOP 1 1 FROM Teachers " +
+                    "WHERE SurName = @SurName AND Name = @Name AND LastName = @LastName";
+
+                using (SqlCommand cmd = new SqlCommand(sqlCheck, conn))
+                {
+                    cmd.Parameters.AddWithValue("@SurName", SurName);
+                    cmd.Parameters.AddWithValue("@Name", Name);
+                    cmd.Parameters.AddWithValue("@LastName", LastName);
+                    var res = cmd.ExecuteScalar();
+
+                    if (res != null) 
+                    {
+                        MessageBox.Show($"Такой учитель уже есть!", "Ошибка",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return false;
+                    };
+                }
+                try
+                {
+
+                    int idNewTeacher = -1;
+                    string sqlAdd = "INSERT INTO Teachers " +
+                                        "(SurName, Name, LastName) " +
+                                        "OUTPUT INSERTED.Id " +
+                                        "VALUES (@SurName, @Name, @LastName)";
+                    using (SqlCommand cmd = new SqlCommand(sqlAdd, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@SurName", SurName);
+                        cmd.Parameters.AddWithValue("@Name", Name);
+                        cmd.Parameters.AddWithValue("@LastName", LastName);
+
+                        idNewTeacher = (int)cmd.ExecuteScalar();
+                    }
+                    
+                    if (idNewTeacher == -1)
+                    {
+                        MessageBox.Show($"Не удалось добавить запись учителя в таблицу пользователей", "Ошибка",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return false;
+                    }
+
+                    string sqlAddUser = "INSERT INTO Users (Login, Password, Role, IdTeacher) " +
+                        "VALUES (@Login, @Password, @Role, @IdTeacher)";
+                    using (SqlCommand cmd = new SqlCommand(sqlAddUser, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@Login", Login);
+                        cmd.Parameters.AddWithValue("@Password", SecurityHelper.HashPassword(Password));
+                        cmd.Parameters.AddWithValue("@Role", "Teacher");
+                        cmd.Parameters.AddWithValue("@IdTeacher", idNewTeacher);
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Не удалось добавить учителя: {ex.Message}", "Ошибка",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return false;
+                }
             }
+                return true;
         }
         catch (Exception ex)
         {
             MessageBox.Show($"Ошибка: {ex.Message}");
-            return null;
+            return false;
+        }
+    }
+
+    public static bool DelTeacher(DataGridView dgvTeachers)
+    {
+        try
+        {
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+
+                int idTeacher = (int)dgvTeachers.CurrentRow.Cells["Id"].Value;
+                string fullName = dgvTeachers.CurrentRow.Cells["Фамилия"].Value.ToString() +
+                    " " + dgvTeachers.CurrentRow.Cells["Имя"].Value.ToString() +
+                    " " + dgvTeachers.CurrentRow.Cells["Отчество"].Value.ToString();
+
+                var confirm = MessageBox.Show($"Удалить учителя {fullName}?", "Подтверждение",
+                    MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                if (confirm == DialogResult.No) return false;
+
+                string sqlDel = "DELETE FROM Users WHERE IdTeacher = @Id";
+
+                using (SqlCommand cmd = new SqlCommand(sqlDel, conn))
+                {
+                    cmd.Parameters.AddWithValue("@Id", idTeacher);
+                    cmd.ExecuteNonQuery();
+                }
+
+                string sql = "DELETE FROM Teachers WHERE Id = @Id";
+
+                using (SqlCommand cmd = new SqlCommand(sql, conn))
+                {
+                    cmd.Parameters.AddWithValue("@Id", idTeacher);
+                    cmd.ExecuteNonQuery();
+                }
+                return true;
+            }
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show($"Возникла ошибка при удалении учителя: {ex.Message}",
+                "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            return false;
         }
     }
 
@@ -74,25 +203,8 @@ public static class DataBaseManager
     //
     public static DataTable GetAllSpecialties()
     {
-        try
-        {
-            using (SqlConnection conn = new SqlConnection(connectionString))
-            {
-                conn.Open();
-                string sql = "SELECT Id, Name AS [Название] FROM Specialties";
-
-                SqlDataAdapter adapter = new SqlDataAdapter(sql, conn);
-                DataTable dt = new DataTable();
-                adapter.Fill(dt);
-                return dt;
-            }
-        }
-        catch (Exception ex)
-        {
-            MessageBox.Show($"Возникла ошибка при загрузке всех направлений: {ex.Message}",
-                "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            return null;
-        }
+        string sql = "SELECT Id, Name AS [Название] FROM Specialties";
+        return GetAllMethod(sql);
     }
 
     public static bool AddSpecialties(TextBox nameSpecilties)
@@ -179,30 +291,12 @@ public static class DataBaseManager
     //
     public static DataTable GetAllGroups()
     {
-        try
-        {
-            using (SqlConnection conn = new SqlConnection(connectionString))
-            {
-                conn.Open();
-
-                string sql = @"SELECT g.Id, 
+        string sql = @"SELECT g.Id, 
                         g.Name AS [Название], 
                         s.Name AS [Направление]
                         FROM Groups AS g
                         LEFT JOIN Specialties AS s ON g.IdSpecialty = s.Id";
-
-                SqlDataAdapter adapter = new SqlDataAdapter(sql, conn);
-                DataTable dt = new DataTable();
-                adapter.Fill(dt);
-                return dt;
-            }
-        }
-        catch (Exception ex)
-        {
-            MessageBox.Show($"Ошибка загрузки таблицы групп: {ex.Message}",
-                    "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            return null;
-        }
+        return GetAllMethod(sql);
     }
 
     public static bool AddGroup(TextBox groupNameInput, ComboBox specialityInput)
@@ -293,13 +387,8 @@ public static class DataBaseManager
 
     public static DataTable GetAllStudents()
     {
-        try
-        {
-            using (SqlConnection conn = new SqlConnection(connectionString))
-            {
-                conn.Open();
-
-                string sql = @"SELECT s.Id,
+        
+        string sql = @"SELECT s.Id,
                            s.SurName + ' ' + s.Name + ' ' + s.LastName AS [ФИО],
                            s.BirthDate AS [Дата рождения],
                            s.Phone AS [Телефон],
@@ -312,18 +401,7 @@ public static class DataBaseManager
                            LEFT JOIN Grades AS grd ON grd.IdStudent = s.Id
                            JOIN Specialties AS spec ON g.IdSpecialty = spec.Id
                            GROUP BY s.Id, s.SurName, s.Name, s.LastName, s.BirthDate, s.Phone, s.Email, spec.Name, g.Name";
-
-                SqlDataAdapter adapter = new SqlDataAdapter(sql, conn);
-                DataTable dt = new DataTable();
-                adapter.Fill(dt);
-                return dt;
-            }
-        }
-        catch (Exception ex)
-        {
-            MessageBox.Show($"Ошибка: {ex.Message}");
-            return null;
-        }
+        return GetAllMethod(sql);
     }
 
     public static bool AddStudent(string SurName, string Name, string LastName,
@@ -403,24 +481,81 @@ public static class DataBaseManager
 
     public static DataTable GetAllSubjects()
     {
+        string sql = "SELECT Id, Name AS [Название] FROM Subjects";
+        return GetAllMethod(sql);
+    }
+
+    public static bool AddSubjects(string name)
+    {
         try
         {
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 conn.Open();
 
-                string sql = "SELECT * FROM Subjects";
-                SqlDataAdapter adapter = new SqlDataAdapter(sql, conn);
-                DataTable dt = new DataTable();
-                adapter.Fill(dt);
+                string sqlCheck = "SELECT TOP 1 1 FROM Subjects WHERE Name = @Name";
+                using (SqlCommand cmd = new SqlCommand(sqlCheck, conn))
+                {
+                    cmd.Parameters.AddWithValue("@Name", name);
+                    object res = cmd.ExecuteScalar();
+                    if (res != null)
+                    {
+                        MessageBox.Show($"Такой предмет уже есть!",
+                        "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return false;
+                    }
+                }
 
-                return dt;
+                string sql = "INSERT INTO Subjects (Name) VALUES (@Name)";
+
+                using (SqlCommand cmd = new SqlCommand(sql, conn))
+                {
+                    cmd.Parameters.AddWithValue("@Name", name);
+                    cmd.ExecuteNonQuery();
+                    return true;
+                }
             }
         }
         catch (Exception ex)
         {
-            MessageBox.Show($"Ошибка: {ex.Message}");
-            return null;
+            MessageBox.Show($"Ошибка при добавлении предмета: {ex.Message}",
+                "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            return false;
+        }
+    }
+
+    public static bool DelSubjects(DataGridView dgv)
+    {
+        try
+        {
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+
+                int id = (int)dgv.CurrentRow.Cells["Id"].Value;
+                string name = dgv.CurrentRow.Cells["Название"].Value.ToString();
+
+                var confirm = MessageBox.Show($"Удалить предмет {name}?", "Подтверждение",
+                    MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                if (confirm == DialogResult.No) return false;
+
+                string sql = "DELETE FROM Subjects WHERE Id = @Id";
+
+                using (SqlCommand cmd = new SqlCommand(sql, conn))
+                {
+                    cmd.Parameters.AddWithValue("@Id", id);
+                    cmd.ExecuteNonQuery();
+                    return true;
+                }
+
+            }
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show($"Ошибка при удалении предмета: {ex.Message}",
+                "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            return false;
         }
     }
 
@@ -434,25 +569,8 @@ public static class DataBaseManager
 
     public static DataTable GetAllGrades()
     {
-        try
-        {
-            using (SqlConnection conn = new SqlConnection(connectionString))
-            {
-                conn.Open();
-
-                string sql = "SELECT * FROM Grades";
-                SqlDataAdapter adapter = new SqlDataAdapter(sql, conn);
-                DataTable dt = new DataTable();
-                adapter.Fill(dt);
-
-                return dt;
-            }
-        }
-        catch (Exception ex)
-        {
-            MessageBox.Show($"Ошибка: {ex.Message}");
-            return null;
-        }
+        string sql = "SELECT * FROM Grades";
+        return GetAllMethod(sql);
     }
 
     //
@@ -465,24 +583,84 @@ public static class DataBaseManager
 
     public static DataTable GetAllGradeTypes()
     {
+        string sql = "SELECT Id, Name AS [Название] FROM GradeTypes";
+        return GetAllMethod(sql);
+    }
+
+    public static bool AddGradeTypes(string name)
+    {
         try
         {
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 conn.Open();
 
-                string sql = "SELECT * FROM GradeTypes";
-                SqlDataAdapter adapter = new SqlDataAdapter(sql, conn);
-                DataTable dt = new DataTable();
-                adapter.Fill(dt);
+                string sqlCheck = "SELECT TOP 1 1 FROM GradeTypes " +
+                    "WHERE Name = @Name";
 
-                return dt;
+                using (SqlCommand cmd = new SqlCommand(sqlCheck, conn))
+                {
+                    cmd.Parameters.AddWithValue("@Name", name);
+                    var res = cmd.ExecuteScalar();
+
+                    if (res != null)
+                    {
+                        MessageBox.Show($"Такой тип оценки уже есть!", "Ошибка",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return false;
+                    }
+                    ;
+                }
+
+                string sql = "INSERT INTO GradeTypes (Name) VALUES (@Name)";
+
+                using (SqlCommand cmd = new SqlCommand(sql, conn))
+                {
+                    cmd.Parameters.AddWithValue("@Name", name);
+                    cmd.ExecuteNonQuery();
+                    return true;
+                }
             }
         }
         catch (Exception ex)
         {
-            MessageBox.Show($"Ошибка: {ex.Message}");
-            return null;
+            MessageBox.Show($"Ошибка при добавлении типа оценки: {ex.Message}");
+            return false;
+        }
+    }
+
+    public static bool DelGradeTypes(DataGridView dgvGradeTypes)
+    {
+        try
+        {
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+                string sql = "DELETE FROM GradeTypes WHERE Id = @Id";
+                int id = (int)dgvGradeTypes.CurrentRow.Cells["Id"].Value;
+                string name = dgvGradeTypes.CurrentRow.Cells["Название"].Value.ToString();
+
+                var confirm = MessageBox.Show($"Удалить тип оценки: {name}?", "Подтверждение",
+                    MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                if (confirm == DialogResult.Yes)
+                {
+                    using (SqlCommand cmd = new SqlCommand(sql, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@Id", id);
+                        cmd.ExecuteNonQuery();
+                        return true;
+                    }
+                }
+                return false;
+
+            }
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show($"Ошибка удаления типа оценки: {ex.Message}",
+                "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            return false;
         }
     }
 

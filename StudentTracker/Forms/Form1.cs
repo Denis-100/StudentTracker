@@ -1,40 +1,34 @@
 ﻿using System;
 using System.Data;
+using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Windows.Forms;
 using StudentTracker.Forms;
+using StudentTracker.Services;
 
 namespace StudentTracker
 {
     public partial class Form1 : Form
     {
+        private string thisTable = "Students";
+        private DataTable thisDataTable = DataBaseManager.GetAllStudents();
+
         public Form1()
         {
             InitializeComponent();
-            LoadData();
+            LoadData(DataBaseManager.GetAllStudents());
         }
+
 
         // Метод загрузка данных из базы данных
         private void LoadData(DataTable dataTable = null)
         {
             try
             {
-                // Загрузка данных в таблицу в форме
                 if (dataTable != null) dgvMain.DataSource = dataTable;
-                else dgvMain.DataSource = DataBaseManager.GetAllStudents();
+                else dgvMain.DataSource = thisDataTable;
 
-                // Авто подбор ширины слобцов
-                dgvMain.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
-                // Режим только для чтения
-                dgvMain.ReadOnly = true;
-                // Убирает нижнюю пустую строку
-                dgvMain.AllowUserToAddRows = false;
-                // Выделяет всю строку сразу при нажатии на ячейку
-                dgvMain.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-                // Запрет на изменение размеров строк и столбцов
-                dgvMain.AllowUserToResizeColumns = false;
-                dgvMain.AllowUserToResizeRows = false;
-                // Запрет на изменение высоты заголовков
-                dgvMain.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+                SetDefaultDGVSettings.Default(dgvMain);
             }
             catch (Exception ex)
             {
@@ -43,9 +37,44 @@ namespace StudentTracker
             
         }
 
+        private void RefreshActiveTable()
+        {
+            switch (thisTable)
+            {
+                case "Users":
+                    thisDataTable = DataBaseManager.GetAllUsers();
+                    break;
+                case "Teachers":
+                    thisDataTable = DataBaseManager.GetAllTeachers();
+                    break;
+                case "Specialties":
+                    thisDataTable = DataBaseManager.GetAllSpecialties();
+                    break;
+                case "Groups":
+                    thisDataTable = DataBaseManager.GetAllGroups();
+                    break;
+                case "Students":
+                    thisDataTable = DataBaseManager.GetAllStudents();
+                    break;
+                case "Subjects":
+                    thisDataTable = DataBaseManager.GetAllSubjects();
+                    break;
+                case "Grades":
+                    thisDataTable = DataBaseManager.GetAllGrades();
+                    break;
+                case "GradeTypes":
+                    thisDataTable = DataBaseManager.GetAllGradeTypes();
+                    break;
+                default:
+                    return;
+            }
+
+            LoadData();
+        }
+
         private void btn_refresh_Click(object sender, EventArgs e)
         {
-            LoadData();
+            RefreshActiveTable();
         }
 
 
@@ -54,20 +83,46 @@ namespace StudentTracker
         private void направлениеХToolStripMenuItem_Click(object sender, EventArgs e)
         {
             AddSpecialitiesForm addForm = new AddSpecialitiesForm();
+            addForm.OnAddSpecialties += () => RefreshActiveTable();
             addForm.ShowDialog();
         }
         // Добавить Группу
         private void группаToolStripMenuItem_Click(object sender, EventArgs e)
         {
             AddGroupForm addForm = new AddGroupForm();
-            addForm.OnGroupAdd += () => LoadData();
+            addForm.OnGroupAdd += () => RefreshActiveTable();
             addForm.ShowDialog();
         }
+
+        // Учителя
+        private void учителяToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AddTeacherForm addForm = new AddTeacherForm();
+            addForm.OnAddTeacher += () => RefreshActiveTable();
+            addForm.ShowDialog();
+        }
+
         // Добавить Студента
         private void студентаToolStripMenuItem_Click(object sender, EventArgs e)
         {
             AddStudentForm addForm = new AddStudentForm();
-            addForm.OnStudentAdd += () => LoadData();
+            addForm.OnStudentAdd += () => RefreshActiveTable();
+            addForm.ShowDialog();
+        }
+
+        // Добавить Предмет
+        private void предметToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AddSubjectsForm addForm = new AddSubjectsForm();
+            addForm.OnAddSubjects += () => RefreshActiveTable();
+            addForm.ShowDialog();
+        }
+
+        // Добавить Тип оценки
+        private void типОценкиХToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AddGradeTypesForm addForm = new AddGradeTypesForm();
+            addForm.OnAddGradeTypes += () => RefreshActiveTable();
             addForm.ShowDialog();
         }
 
@@ -79,7 +134,7 @@ namespace StudentTracker
         private void направлениеToolStripMenuItem_Click(object sender, EventArgs e)
         {
             DelSpecialtiesForm delSpecialtiesForm = new DelSpecialtiesForm();
-            delSpecialtiesForm.OnDelSpecilties += () => LoadData();
+            delSpecialtiesForm.OnDelSpecilties += () => RefreshActiveTable();
             delSpecialtiesForm.ShowDialog();
         }
 
@@ -87,7 +142,15 @@ namespace StudentTracker
         private void группуToolStripMenuItem_Click(object sender, EventArgs e)
         {
             DelGroupForm delForm = new DelGroupForm();
-            delForm.OnGroupDel += () => LoadData();
+            delForm.OnGroupDel += () => RefreshActiveTable();
+            delForm.ShowDialog();
+        }
+
+        // Удалить Учителя
+        private void учителяХToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DelTeacherForm delForm = new DelTeacherForm();
+            delForm.OnDelTeacher += () => RefreshActiveTable();
             delForm.ShowDialog();
         }
 
@@ -95,59 +158,91 @@ namespace StudentTracker
         private void студентаToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             DelStudentForm delForm = new DelStudentForm();
-            delForm.OnDelStudent += () => LoadData();
-            delForm.Show();
+            delForm.OnDelStudent += () => RefreshActiveTable();
+            delForm.ShowDialog();
+        }
+
+        // Удалить предмет
+        private void предметХToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DelSubjectsForm delForm = new DelSubjectsForm();
+            delForm.OnDelSubjects += () => RefreshActiveTable();
+            delForm.ShowDialog();
+        }
+
+        // Удалить Тип оценки
+        private void типОценкиХToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            DelGradeTypesForm delForm = new DelGradeTypesForm();
+            delForm.OnDelGradeTypes += () => RefreshActiveTable();
+            delForm.ShowDialog();
         }
 
         // --- Раздел Удалить ---
         //
         // --- Раздел Таблица ---
 
-        // Таблица Направлений
-        private void направленийХToolStripMenuItem_Click_Click(object sender, EventArgs e)
-        {
-            LoadData(DataBaseManager.GetAllSpecialties());
-        }
-
-        // Таблица Групп
-        private void группToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            LoadData(DataBaseManager.GetAllGroups());
-        }
-
-        // Таблица Студентов
-        private void студентовToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            LoadData(DataBaseManager.GetAllStudents());
-        }
-
         // Таблица Пользователей
         private void пользователейToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            thisTable = "Users";
+            thisDataTable = DataBaseManager.GetAllUsers();
             LoadData(DataBaseManager.GetAllUsers());
         }
 
         // Таблица Учителей
         private void учителейToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            thisTable = "Teachers";
+            thisDataTable = DataBaseManager.GetAllTeachers();
             LoadData(DataBaseManager.GetAllTeachers());
+        }
+
+        // Таблица Направлений
+        private void направленийХToolStripMenuItem_Click_Click(object sender, EventArgs e)
+        {
+            thisTable = "Specialties";
+            thisDataTable = DataBaseManager.GetAllSpecialties();
+            LoadData(DataBaseManager.GetAllSpecialties());
+        }
+
+        // Таблица Групп
+        private void группToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            thisTable = "Groups";
+            thisDataTable = DataBaseManager.GetAllGroups();
+            LoadData(DataBaseManager.GetAllGroups());
+        }
+
+        // Таблица Студентов
+        private void студентовToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            thisTable = "Students";
+            thisDataTable = DataBaseManager.GetAllStudents();
+            LoadData(DataBaseManager.GetAllStudents());
         }
 
         // Таблица Предметов
         private void предметовToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            thisTable = "Subjects";
+            thisDataTable = DataBaseManager.GetAllSubjects();
             LoadData(DataBaseManager.GetAllSubjects());
         }
 
         // Таблица Оценок
         private void оценокToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            thisTable = "Grades";
+            thisDataTable = DataBaseManager.GetAllGrades();
             LoadData(DataBaseManager.GetAllGrades());
         }
 
         // Таблица Типов оценок
         private void типовОценокToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            thisTable = "GradeTypes";
+            thisDataTable = DataBaseManager.GetAllGradeTypes();
             LoadData(DataBaseManager.GetAllGradeTypes());
         }
 

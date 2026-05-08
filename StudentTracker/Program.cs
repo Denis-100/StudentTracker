@@ -1,0 +1,32 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace StudentTracker
+{
+    internal static class Program
+    {
+        /// <summary>
+        /// Главная точка входа для приложения.
+        /// </summary>  
+        [STAThread]
+        static void Main()
+        {
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+
+            DatabaseInitializer.Init();
+
+            Application.Run(new Form1());
+
+
+            //LoginForm login = new LoginForm();
+            //if (login.ShowDialog() == DialogResult.OK)
+            //{
+            //    Application.Run(new Form1());
+            //}
+        }
+    }
+}

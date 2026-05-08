@@ -13,7 +13,6 @@ namespace StudentTracker
 {
     public partial class DelSpecialtiesForm : Form
     {
-        public event Action OnDelSpecilties;
         private string connectionString = DatabaseInitializer.getConnectionString();
 
         public DelSpecialtiesForm()
@@ -40,12 +39,7 @@ namespace StudentTracker
         private void btnDelSpecilties_Click(object sender, EventArgs e)
         {
             bool result = DataBaseManager.DelSpecilties(dgvSpecialtiesDel);
-
-            if (result)
-            {
-                OnDelSpecilties?.Invoke();
-                LoadData();
-            }
+            if (result) LoadData();
         }
     }
 }
