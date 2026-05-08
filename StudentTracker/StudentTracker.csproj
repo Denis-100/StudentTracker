@@ -48,76 +48,76 @@
   <ItemGroup>
     <Compile Include="Data\DatabaseInitializer.cs" />
     <Compile Include="Data\DataBaseManager.cs" />
-    <Compile Include="Forms\AddGradeTypesForm.cs">
+    <Compile Include="Forms\GradeType\AddGradeTypesForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\AddGradeTypesForm.Designer.cs">
+    <Compile Include="Forms\GradeType\AddGradeTypesForm.Designer.cs">
       <DependentUpon>AddGradeTypesForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\AddGroupForm.cs">
+    <Compile Include="Forms\Group\AddGroupForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\AddGroupForm.Designer.cs">
+    <Compile Include="Forms\Group\AddGroupForm.Designer.cs">
       <DependentUpon>AddGroupForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\AddSpecialitiesForm.cs">
+    <Compile Include="Forms\Specialties\AddSpecialitiesForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\AddSpecialitiesForm.Designer.cs">
+    <Compile Include="Forms\Specialties\AddSpecialitiesForm.Designer.cs">
       <DependentUpon>AddSpecialitiesForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\AddStudentForm.cs">
+    <Compile Include="Forms\Student\AddStudentForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\AddStudentForm.Designer.cs">
+    <Compile Include="Forms\Student\AddStudentForm.Designer.cs">
       <DependentUpon>AddStudentForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\AddSubjectsForm.cs">
+    <Compile Include="Forms\Subject\AddSubjectsForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\AddSubjectsForm.Designer.cs">
+    <Compile Include="Forms\Subject\AddSubjectsForm.Designer.cs">
       <DependentUpon>AddSubjectsForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\AddTeacherForm.cs">
+    <Compile Include="Forms\Teacher\AddTeacherForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\AddTeacherForm.Designer.cs">
+    <Compile Include="Forms\Teacher\AddTeacherForm.Designer.cs">
       <DependentUpon>AddTeacherForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\DelGradeTypesForm.cs">
+    <Compile Include="Forms\GradeType\DelGradeTypesForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\DelGradeTypesForm.Designer.cs">
+    <Compile Include="Forms\GradeType\DelGradeTypesForm.Designer.cs">
       <DependentUpon>DelGradeTypesForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\DelGroupForm.cs">
+    <Compile Include="Forms\Group\DelGroupForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\DelGroupForm.Designer.cs">
+    <Compile Include="Forms\Group\DelGroupForm.Designer.cs">
       <DependentUpon>DelGroupForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\DelSpecialtiesForm.cs">
+    <Compile Include="Forms\Specialties\DelSpecialtiesForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\DelSpecialtiesForm.Designer.cs">
+    <Compile Include="Forms\Specialties\DelSpecialtiesForm.Designer.cs">
       <DependentUpon>DelSpecialtiesForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\DelStudentForm.cs">
+    <Compile Include="Forms\Student\DelStudentForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\DelStudentForm.Designer.cs">
+    <Compile Include="Forms\Student\DelStudentForm.Designer.cs">
       <DependentUpon>DelStudentForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\DelSubjectsForm.cs">
+    <Compile Include="Forms\Subject\DelSubjectsForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\DelSubjectsForm.Designer.cs">
+    <Compile Include="Forms\Subject\DelSubjectsForm.Designer.cs">
       <DependentUpon>DelSubjectsForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\DelTeacherForm.cs">
+    <Compile Include="Forms\Teacher\DelTeacherForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\DelTeacherForm.Designer.cs">
+    <Compile Include="Forms\Teacher\DelTeacherForm.Designer.cs">
       <DependentUpon>DelTeacherForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Form1.cs">
@@ -126,56 +126,56 @@
     <Compile Include="Forms\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\LoginForm.cs">
+    <Compile Include="Forms\Authorization\LoginForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\LoginForm.Designer.cs">
+    <Compile Include="Forms\Authorization\LoginForm.Designer.cs">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\Program.cs" />
     <Compile Include="Services\SecurityHelper.cs" />
     <Compile Include="Services\SetDefaultDGVSettings.cs" />
-    <EmbeddedResource Include="Forms\AddGradeTypesForm.resx">
+    <EmbeddedResource Include="Forms\GradeType\AddGradeTypesForm.resx">
       <DependentUpon>AddGradeTypesForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\AddGroupForm.resx">
+    <EmbeddedResource Include="Forms\Group\AddGroupForm.resx">
       <DependentUpon>AddGroupForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\AddSpecialitiesForm.resx">
+    <EmbeddedResource Include="Forms\Specialties\AddSpecialitiesForm.resx">
       <DependentUpon>AddSpecialitiesForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\AddStudentForm.resx">
+    <EmbeddedResource Include="Forms\Student\AddStudentForm.resx">
       <DependentUpon>AddStudentForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\AddSubjectsForm.resx">
+    <EmbeddedResource Include="Forms\Subject\AddSubjectsForm.resx">
       <DependentUpon>AddSubjectsForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\AddTeacherForm.resx">
+    <EmbeddedResource Include="Forms\Teacher\AddTeacherForm.resx">
       <DependentUpon>AddTeacherForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\DelGradeTypesForm.resx">
+    <EmbeddedResource Include="Forms\GradeType\DelGradeTypesForm.resx">
       <DependentUpon>DelGradeTypesForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\DelGroupForm.resx">
+    <EmbeddedResource Include="Forms\Group\DelGroupForm.resx">
       <DependentUpon>DelGroupForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\DelSpecialtiesForm.resx">
+    <EmbeddedResource Include="Forms\Specialties\DelSpecialtiesForm.resx">
       <DependentUpon>DelSpecialtiesForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\DelStudentForm.resx">
+    <EmbeddedResource Include="Forms\Student\DelStudentForm.resx">
       <DependentUpon>DelStudentForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\DelSubjectsForm.resx">
+    <EmbeddedResource Include="Forms\Subject\DelSubjectsForm.resx">
       <DependentUpon>DelSubjectsForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\DelTeacherForm.resx">
+    <EmbeddedResource Include="Forms\Teacher\DelTeacherForm.resx">
       <DependentUpon>DelTeacherForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\LoginForm.resx">
+    <EmbeddedResource Include="Forms\Authorization\LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
