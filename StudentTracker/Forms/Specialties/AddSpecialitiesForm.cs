@@ -17,7 +17,6 @@ namespace StudentTracker
         private void LoadData()
         {
             dgvSpecialtiesAdd.DataSource = DataBaseManager.GetAllSpecialties();
-
             SetDefaultDGVSettings.Default(dgvSpecialtiesAdd);
         }
 
