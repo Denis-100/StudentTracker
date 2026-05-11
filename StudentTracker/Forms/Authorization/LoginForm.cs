@@ -1,13 +1,18 @@
-﻿using System;
+﻿using StudentTracker.Forms.Profiles;
+using System;
+using System.Data;
 using System.Data.SqlClient;
-using System.Drawing.Drawing2D;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Windows.Forms;
 
 namespace StudentTracker
 {
     public partial class LoginForm : Form
     {
+        public static string currentRole = "";
+        public static int currentId = -1;
+
         private string connectionString = DatabaseInitializer.getConnectionString();
         public LoginForm()
         {
@@ -21,28 +26,51 @@ namespace StudentTracker
             if (!IsValid()) return;
 
             string enterPassword = SecurityHelper.HashPassword(PasswordInput.Text);
-
-            using (SqlConnection conn = new SqlConnection(connectionString))
+            try
             {
-                conn.Open();
-                string sql = "SELECT Role FROM Users WHERE Login = @login AND Password = @password";
-                using (SqlCommand command = new SqlCommand(sql, conn))
+                using (SqlConnection conn = new SqlConnection(connectionString))
                 {
-                    command.Parameters.AddWithValue("@login", LoginInput.Text);
-                    command.Parameters.AddWithValue("@password", enterPassword);
+                    conn.Open();
+                    int id;
+                    string sql = "SELECT Role, IdTeacher, IdStudent FROM Users WHERE Login = @login AND Password = @password";
+                    using (SqlCommand command = new SqlCommand(sql, conn))
+                    {
+                        command.Parameters.AddWithValue("@login", LoginInput.Text);
+                        command.Parameters.AddWithValue("@password", enterPassword);
 
-                    object role = command.ExecuteScalar();
-                    if (role != null)
-                    {
-                        MessageBox.Show($"Добро пожаловать, {role}");
-                        this.DialogResult = DialogResult.OK;
-                    }
-                    else
-                    {
-                        MessageBox.Show("Неверный логин или пароль!");
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                string role = reader["Role"].ToString();
+                                currentRole = role;
+
+                                if (role.Equals("Teacher")) currentId = Convert.ToInt32(reader["IdTeacher"]);
+                                else if (role.Equals("Student")) currentId = Convert.ToInt32(reader["IdStudent"]);
+                                else
+                                {
+                                    checkPassAdmin();
+                                    currentId = -1;
+                                }
+
+                                MessageBox.Show($"Добро пожаловать, {role}");
+                                this.DialogResult = DialogResult.OK;
+                            }
+                            else
+                            {
+                                MessageBox.Show("Неверный логин или пароль!");
+                            }
+                        }
                     }
                 }
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Возникла ошибка при авторизации: {ex.Message}",
+            "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            
         }
 
         private bool IsValid()
@@ -68,6 +96,24 @@ namespace StudentTracker
         private void button1_Click(object sender, EventArgs e)
         {
             PasswordInput.UseSystemPasswordChar = !PasswordInput.UseSystemPasswordChar;
+        }
+
+        private void checkPassAdmin()
+        {
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+                string sql = "SELECT Password FROM Users WHERE Role = 'Admin'";
+
+                SqlCommand cmd = new SqlCommand(sql, conn);
+                string pas = cmd.ExecuteScalar().ToString();
+                if (pas.Equals(SecurityHelper.HashPassword("admin")))
+                {
+                    MessageBox.Show("Администратор, смените пароль для безопасности!");
+                    ChangePasswordForm changePasswordForm = new ChangePasswordForm();
+                    changePasswordForm.ShowDialog();
+                }
+            }
         }
     }
 }

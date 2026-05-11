@@ -114,6 +114,13 @@ public static class DatabaseInitializer
                                 Grade INT NOT NULL CHECK (Grade BETWEEN 2 AND 5),
                                 AcademicYear NVARCHAR(10) NOT NULL,
                                 Date DATETIME2 DEFAULT GETDATE()
+                            )
+
+                            IF NOT EXISTS (SELECT * FROM sys.tables WHERE name = 'TeacherSubjects')
+                            CREATE TABLE TeacherSubjects(
+                                IdTeacher INT REFERENCES Teachers(Id) ON DELETE CASCADE,
+                                IdSubject INT REFERENCES Subjects(Id) ON DELETE CASCADE,
+                                PRIMARY KEY (IdTeacher, IdSubject) -- Чтобы нельзя было привязать одного учителя к одному предмету дважды
                             )";
 
             using (SqlCommand command = new SqlCommand(sql, connection))

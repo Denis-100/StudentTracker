@@ -4,19 +4,23 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Windows.Forms;
 using StudentTracker.Forms;
+using StudentTracker.Forms.Grade;
+using StudentTracker.Forms.Profiles;
+using StudentTracker.Forms.Subject;
 using StudentTracker.Services;
 
 namespace StudentTracker
 {
     public partial class Form1 : Form
     {
-        private string thisTable = "Students";
-        private DataTable thisDataTable = DataBaseManager.GetAllStudents();
+        private string thisTable = "Grades";
+        private DataTable thisDataTable = DataBaseManager.GetAllGrades();
 
         public Form1()
         {
             InitializeComponent();
-            LoadData(DataBaseManager.GetAllStudents());
+            LoadData();
+            AccessLevel();
         }
 
 
@@ -34,7 +38,46 @@ namespace StudentTracker
             {
                 MessageBox.Show($"Ошибка: {ex.Message}");
             }
-            
+        }
+
+        private void AccessLevel()
+        {
+            string role = LoginForm.currentRole;
+            if (role.Equals("Admin")) { }
+            else
+            {
+                // Вкладка таблица
+                toolStripSettings.Visible = false;
+                table_users.Visible = false;
+
+                // Вкладка добавить
+                add_specialties.Visible = false;
+                add_group.Visible = false;
+                add_teacher.Visible = false;
+                add_student.Visible = false;
+                add_subject.Visible = false;
+                add_grade_type.Visible = false;
+
+                // Вкладка удалить
+                del_specialties.Visible = false;
+                del_group.Visible = false;
+                del_teacher.Visible = false;
+                del_student.Visible = false;
+                del_subject.Visible = false;
+                del_grade_type.Visible = false;
+
+                if (role.Equals("Student"))
+                {
+                    table_teachers.Visible = false;
+                    table_groups.Visible = false;
+                    table_students.Visible = false;
+
+                    table_avg_grade.Visible = true;
+
+                    toolStripAdd.Visible = false;
+                    toolStripDel.Visible = false;
+                }
+            }
         }
 
         private void RefreshActiveTable()
@@ -118,6 +161,14 @@ namespace StudentTracker
             addForm.ShowDialog();
         }
 
+        // Добавить Оценку
+        private void оценкуToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AddGradeForm addForm = new AddGradeForm();
+            addForm.OnAddGrade += () => RefreshActiveTable();
+            addForm.ShowDialog();
+        }
+
         // Добавить Тип оценки
         private void типОценкиХToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -162,12 +213,20 @@ namespace StudentTracker
             delForm.ShowDialog();
         }
 
-        // Удалить предмет
+        // Удалить Предмет
         private void предметХToolStripMenuItem_Click(object sender, EventArgs e)
         {
             DelSubjectsForm delForm = new DelSubjectsForm();
             delForm.OnDelSubjects += () => RefreshActiveTable();
             delForm.ShowDialog();
+        }
+
+        // Удалить Оценку
+        private void оценкуХToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DelGradeForm delGrade = new DelGradeForm();
+            delGrade.OnDelGrade += () => RefreshActiveTable();
+            delGrade.ShowDialog();
         }
 
         // Удалить Тип оценки
@@ -247,5 +306,25 @@ namespace StudentTracker
         }
 
         // --- Раздел Таблица ---
+
+
+
+        private void назначитьПредметыУчителюToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SetSubjectTeacher setSubject = new SetSubjectTeacher();
+            setSubject.ShowDialog();
+        }
+
+        private void btnProfilOpen_Click(object sender, EventArgs e)
+        {
+            ProfileForm profileForm = new ProfileForm();
+            profileForm.ShowDialog();
+        }
+
+        private void table_avg_grade_Click(object sender, EventArgs e)
+        {
+            AvgGradeForm avgForm = new AvgGradeForm();
+            avgForm.ShowDialog();
+        }
     }
 }

@@ -54,11 +54,47 @@
     <Compile Include="Forms\GradeType\AddGradeTypesForm.Designer.cs">
       <DependentUpon>AddGradeTypesForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Grade\AddGradeForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Grade\AddGradeForm.Designer.cs">
+      <DependentUpon>AddGradeForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Grade\AvgGradeForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Grade\AvgGradeForm.Designer.cs">
+      <DependentUpon>AvgGradeForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Grade\DelGradeForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Grade\DelGradeForm.Designer.cs">
+      <DependentUpon>DelGradeForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Group\AddGroupForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\Group\AddGroupForm.Designer.cs">
       <DependentUpon>AddGroupForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Profiles\ChangePasswordForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Profiles\ChangePasswordForm.Designer.cs">
+      <DependentUpon>ChangePasswordForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Profiles\CheckThisPassword.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Profiles\CheckThisPassword.Designer.cs">
+      <DependentUpon>CheckThisPassword.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Profiles\ProfileForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Profiles\ProfileForm.Designer.cs">
+      <DependentUpon>ProfileForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Specialties\AddSpecialitiesForm.cs">
       <SubType>Form</SubType>
@@ -78,6 +114,13 @@
     <Compile Include="Forms\Subject\AddSubjectsForm.Designer.cs">
       <DependentUpon>AddSubjectsForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Subject\SetSubjectTeacher.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Subject\SetSubjectTeacher.Designer.cs">
+      <DependentUpon>SetSubjectTeacher.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Subject\SubjectItem.cs" />
     <Compile Include="Forms\Teacher\AddTeacherForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -139,8 +182,26 @@
     <EmbeddedResource Include="Forms\GradeType\AddGradeTypesForm.resx">
       <DependentUpon>AddGradeTypesForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Grade\AddGradeForm.resx">
+      <DependentUpon>AddGradeForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Grade\AvgGradeForm.resx">
+      <DependentUpon>AvgGradeForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Grade\DelGradeForm.resx">
+      <DependentUpon>DelGradeForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Group\AddGroupForm.resx">
       <DependentUpon>AddGroupForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Profiles\ChangePasswordForm.resx">
+      <DependentUpon>ChangePasswordForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Profiles\CheckThisPassword.resx">
+      <DependentUpon>CheckThisPassword.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Profiles\ProfileForm.resx">
+      <DependentUpon>ProfileForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Specialties\AddSpecialitiesForm.resx">
       <DependentUpon>AddSpecialitiesForm.cs</DependentUpon>
@@ -150,6 +211,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Subject\AddSubjectsForm.resx">
       <DependentUpon>AddSubjectsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Subject\SetSubjectTeacher.resx">
+      <DependentUpon>SetSubjectTeacher.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Teacher\AddTeacherForm.resx">
       <DependentUpon>AddTeacherForm.cs</DependentUpon>

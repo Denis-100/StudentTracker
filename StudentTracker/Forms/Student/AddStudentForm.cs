@@ -83,7 +83,9 @@ namespace StudentTracker
                 BirthDateInput.Text.Trim(),
                 PhoneInput.Text.Trim(),
                 EmailInput.Text.Trim(),
-                (int)GroupInput.SelectedValue
+                (int)GroupInput.SelectedValue,
+                LoginInput.Text.Trim(),
+                PasswordInput.Text.Trim()
                 );
 
             if (result)
@@ -97,6 +99,8 @@ namespace StudentTracker
                 BirthDateInput.Clear();
                 PhoneInput.Clear();
                 EmailInput.Clear();
+                LoginInput.Clear();
+                PasswordInput.Clear();
             }
         }
 
@@ -145,6 +149,17 @@ namespace StudentTracker
             {
                 errorProvider.SetError(GroupInput, "Выберитер группу!");
                 result = false;
+            }
+
+            if (string.IsNullOrWhiteSpace(LoginInput.Text))
+            {
+                errorProvider.SetError(LoginInput, "Введите логин!");
+                result = false;
+            }
+
+            if (string.IsNullOrWhiteSpace(PasswordInput.Text))
+            {
+                errorProvider.SetError(PasswordInput, "Введите пароль!");
             }
 
             return result;

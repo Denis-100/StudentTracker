@@ -54,9 +54,7 @@ public static class DataBaseManager
     {
         
         string sql = "SELECT Id," +
-                    "SurName AS [Фамилия]," +
-                    "Name AS [Имя]," +
-                    "LastName AS [Отчество] FROM Teachers";
+                    "SurName + ' ' + Name + ' ' + LastName AS [ФИО] FROM Teachers";
         return GetAllMethod(sql);
     }
 
@@ -405,32 +403,70 @@ public static class DataBaseManager
     }
 
     public static bool AddStudent(string SurName, string Name, string LastName,
-        string BirthDate, string Phone, string Email, int IdGroup)
+        string BirthDate, string Phone, string Email, int IdGroup, string Login, string Password)
     {
         try
         {
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 conn.Open();
+
+                string sqlCheck = "SELECT TOP 1 1 FROM Students WHERE " +
+                    "Name = @Name AND SurName = @SurName AND Email = @Email AND Phone = @Phone";
+                using (SqlCommand cmd = new SqlCommand(sqlCheck, conn))
+                {
+                    cmd.Parameters.AddWithValue("@Name", Name);
+                    cmd.Parameters.AddWithValue("@SurName", SurName);
+                    cmd.Parameters.AddWithValue("@Email", Email);
+                    cmd.Parameters.AddWithValue("@Phone", Phone);
+                    
+                    object res = cmd.ExecuteScalar();
+
+                    if (res != null)
+                    {
+                        MessageBox.Show($"Такой студент уже есть!");
+                        return false;
+                    }
+                }
+
+                int newIdStudent = -1;
+
                 string sql = "INSERT INTO Students " +
                     "(SurName, Name, LastName, BirthDate, Phone, Email, IdGroup) " +
                     "VALUES " +
-                    "(@surname, @name, @lastname, @birthdate, @phone, @email, @idgroup)";
-                SqlCommand cmd = new SqlCommand(sql, conn);
-                cmd.Parameters.AddWithValue("@surname", SurName);
-                cmd.Parameters.AddWithValue("@name", Name);
-                cmd.Parameters.AddWithValue("@lastname", LastName);
-                cmd.Parameters.AddWithValue("@birthdate", BirthDate);
-                cmd.Parameters.AddWithValue("@phone", Phone);
-                cmd.Parameters.AddWithValue("@email", Email);
-                cmd.Parameters.AddWithValue("@idgroup", IdGroup);
-                
-                return cmd.ExecuteNonQuery() > 0;
+                    "(@surname, @name, @lastname, @birthdate, @phone, @email, @idgroup)" +
+                    "SELECT SCOPE_IDENTITY()";
+                using (SqlCommand cmd = new SqlCommand(sql, conn))
+                {
+                    cmd.Parameters.AddWithValue("@surname", SurName);
+                    cmd.Parameters.AddWithValue("@name", Name);
+                    cmd.Parameters.AddWithValue("@lastname", LastName);
+                    cmd.Parameters.AddWithValue("@birthdate", BirthDate);
+                    cmd.Parameters.AddWithValue("@phone", Phone);
+                    cmd.Parameters.AddWithValue("@email", Email);
+                    cmd.Parameters.AddWithValue("@idgroup", IdGroup);
+
+                    newIdStudent = Convert.ToInt32(cmd.ExecuteScalar());
+                }
+
+                string sqlAdd = "INSERT INTO Users (Login, Password, Role, IdStudent) " +
+                    "VALUES (@Login, @Password, @Role, @IdStudent)";
+                using (SqlCommand cmd = new SqlCommand(sqlAdd, conn))
+                {
+                    cmd.Parameters.AddWithValue("@Login", Login);
+                    cmd.Parameters.AddWithValue("@Password", SecurityHelper.HashPassword(Password));
+                    cmd.Parameters.AddWithValue("@Role", "Student");
+                    cmd.Parameters.AddWithValue("@IdStudent", newIdStudent);
+                    cmd.ExecuteNonQuery();
+                    return true;
+                }
+
             }
         }
         catch (Exception ex)
         {
-            MessageBox.Show($"Ошибка при добавлении студента: {ex.Message}");
+            MessageBox.Show($"Ошибка при добавлении студента: {ex.Message}", "Ошибка", 
+                MessageBoxButtons.OK, MessageBoxIcon.Error);
             return false; 
         }
     }
@@ -451,6 +487,23 @@ public static class DataBaseManager
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 {
                     conn.Open();
+
+                    try
+                    {
+                        string sqlDelUsersStudent = "DELETE FROM Users WHERE IdStudent = @IdStudent";
+                        using (SqlCommand cmd = new SqlCommand(sqlDelUsersStudent, conn))
+                        {
+                            cmd.Parameters.AddWithValue("@IdStudent", studentId);
+                            cmd.ExecuteNonQuery();
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"Не удалось удалить данные о студенте из таблицы пользователей: {ex.Message}",
+                            "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return false;
+                    }
+
                     string sql = "DELETE FROM Students WHERE Id = @Id";
 
                     using (SqlCommand cmd = new SqlCommand(sql, conn))
@@ -569,8 +622,127 @@ public static class DataBaseManager
 
     public static DataTable GetAllGrades()
     {
-        string sql = "SELECT * FROM Grades";
+        string sql;
+
+        if (LoginForm.currentRole.Equals("Student"))
+        {
+            sql = "SELECT g.Id, " +
+            "stud.SurName + ' ' + stud.Name + ' ' + stud.LastName AS [ФИО], " +
+            "sub.Name AS [Предмет], " +
+            "t.SurName + ' ' + t.Name + ' ' + t.LastName AS [Преподаватель], " +
+            "gt.Name AS [Тип оценки], " +
+            "Grade AS [Оценка], " +
+            "FORMAT(g.Date, 'dd.MM.yyyy') AS [Дата], " +
+            "AcademicYear AS [Академический год] " +
+            "FROM Grades g " +
+            "JOIN Students stud ON g.IdStudent = stud.Id " +
+            "JOIN Subjects sub ON g.IdSubject = sub.Id " +
+            "JOIN Teachers t ON g.IdTeacher = t.Id " +
+            "JOIN GradeTypes gt ON g.IdType = gt.Id " +
+            $"WHERE g.IdStudent = {LoginForm.currentId}";
+        }
+        else
+        {
+            sql = "SELECT g.Id, " +
+            "stud.SurName + ' ' + stud.Name + ' ' + stud.LastName AS [ФИО], " +
+            "sub.Name AS [Предмет], " +
+            "t.SurName + ' ' + t.Name + ' ' + t.LastName AS [Преподаватель], " +
+            "gt.Name AS [Тип оценки], " +
+            "Grade AS [Оценка], " +
+            "FORMAT(g.Date, 'dd.MM.yyyy') AS [Дата], " +
+            "AcademicYear AS [Академический год] " +
+            "FROM Grades g " +
+            "JOIN Students stud ON g.IdStudent = stud.Id " +
+            "JOIN Subjects sub ON g.IdSubject = sub.Id " +
+            "JOIN Teachers t ON g.IdTeacher = t.Id " +
+            "JOIN GradeTypes gt ON g.IdType = gt.Id";
+        }
+        
         return GetAllMethod(sql);
+    }
+
+    public static DataTable getAvgGrades()
+    {
+        string sql = $@"SELECT 
+                        sub.Name AS [Предмет], 
+                        ROUND(AVG(CAST(g.Grade AS FLOAT)), 2) AS [Средний балл], 
+                        COUNT(g.Grade) AS [Оценок]
+                        FROM Grades g
+                        JOIN Subjects sub ON g.IdSubject = sub.Id 
+                        WHERE g.IdStudent = {LoginForm.currentId} 
+                        GROUP BY sub.Name";
+
+        return GetAllMethod(sql);
+    }
+
+    public static bool AddGrade(int idStudent, int idSubject, int idGradeType, int idTeacher, int grade,
+        string academicYear, DateTime date)
+    {
+        try
+        {
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+                string sql = "INSERT INTO Grades (IdStudent, IdSubject, IdTeacher, IdType, Grade, AcademicYear, Date) " +
+                    "VALUES (@IdStudent, @IdSubject, @IdTeacher, @IdType, @Grade, @AcademicYear, @Date)";
+
+                using (SqlCommand cmd = new SqlCommand(sql, conn))
+                {
+                    cmd.Parameters.AddWithValue("@IdStudent", idStudent);
+                    cmd.Parameters.AddWithValue("@IdSubject", idSubject);
+                    cmd.Parameters.AddWithValue("@IdTeacher", idTeacher);
+                    cmd.Parameters.AddWithValue("@IdType", idGradeType);
+                    cmd.Parameters.AddWithValue("@Grade", grade);
+                    cmd.Parameters.AddWithValue("@AcademicYear", academicYear);
+                    cmd.Parameters.AddWithValue("@Date", date);
+
+                    cmd.ExecuteNonQuery();
+                    return true;
+                }
+            }
+        }
+        catch(Exception ex)
+        {
+            MessageBox.Show($"Ошибка при добавлении оценки: {ex.Message}",
+                "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            return false;
+        }
+    }
+
+    public static bool DelGrade(DataGridView dgvGrade)
+    {
+        try
+        {
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+                int id = Convert.ToInt32(dgvGrade.CurrentRow.Cells["Id"].Value);
+                string text = $"Удалить оценку {dgvGrade.CurrentRow.Cells["Оценка"].Value.ToString()} у " +
+                    $"{dgvGrade.CurrentRow.Cells["ФИО"].Value.ToString()} " +
+                    $"по предмету {dgvGrade.CurrentRow.Cells["Предмет"].Value.ToString()}?";
+
+                var result = MessageBox.Show(text, "Подтверждение", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                if (result == DialogResult.Yes)
+                {
+
+                    string sql = "DELETE FROM Grades WHERE Id = @Id";
+                    using (SqlCommand cmd = new SqlCommand(sql, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@Id", id);
+                        cmd.ExecuteNonQuery();
+                        return true;
+                    }
+                }
+                return false;
+            }
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show($"Ошибка при удалении оценки: {ex.Message}",
+                "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            return false;
+        }
     }
 
     //

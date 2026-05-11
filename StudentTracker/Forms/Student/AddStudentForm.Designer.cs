@@ -47,6 +47,10 @@
             this.label7 = new System.Windows.Forms.Label();
             this.textBoxSpecialtiesAddStudentForm = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
+            this.LoginInput = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.PasswordInput = new System.Windows.Forms.TextBox();
+            this.label10 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.SuspendLayout();
             // 
@@ -118,7 +122,7 @@
             // 
             // btnAddStudent
             // 
-            this.btnAddStudent.Location = new System.Drawing.Point(246, 160);
+            this.btnAddStudent.Location = new System.Drawing.Point(246, 204);
             this.btnAddStudent.Name = "btnAddStudent";
             this.btnAddStudent.Size = new System.Drawing.Size(100, 21);
             this.btnAddStudent.TabIndex = 8;
@@ -180,7 +184,7 @@
             // 
             // textBoxSpecialtiesAddStudentForm
             // 
-            this.textBoxSpecialtiesAddStudentForm.Location = new System.Drawing.Point(131, 160);
+            this.textBoxSpecialtiesAddStudentForm.Location = new System.Drawing.Point(12, 204);
             this.textBoxSpecialtiesAddStudentForm.Multiline = true;
             this.textBoxSpecialtiesAddStudentForm.Name = "textBoxSpecialtiesAddStudentForm";
             this.textBoxSpecialtiesAddStudentForm.ReadOnly = true;
@@ -190,22 +194,58 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(131, 144);
+            this.label8.Location = new System.Drawing.Point(12, 188);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(75, 13);
             this.label8.TabIndex = 16;
             this.label8.Text = "Направление";
             // 
+            // LoginInput
+            // 
+            this.LoginInput.Location = new System.Drawing.Point(131, 161);
+            this.LoginInput.Name = "LoginInput";
+            this.LoginInput.Size = new System.Drawing.Size(100, 20);
+            this.LoginInput.TabIndex = 11;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(131, 145);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(38, 13);
+            this.label9.TabIndex = 12;
+            this.label9.Text = "Логин";
+            // 
+            // PasswordInput
+            // 
+            this.PasswordInput.Location = new System.Drawing.Point(246, 161);
+            this.PasswordInput.Name = "PasswordInput";
+            this.PasswordInput.Size = new System.Drawing.Size(100, 20);
+            this.PasswordInput.TabIndex = 13;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(246, 145);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(45, 13);
+            this.label10.TabIndex = 14;
+            this.label10.Text = "Пароль";
+            // 
             // AddStudentForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(370, 204);
+            this.ClientSize = new System.Drawing.Size(370, 248);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.textBoxSpecialtiesAddStudentForm);
+            this.Controls.Add(this.label10);
             this.Controls.Add(this.label7);
+            this.Controls.Add(this.PasswordInput);
             this.Controls.Add(this.EmailInput);
+            this.Controls.Add(this.label9);
             this.Controls.Add(this.label6);
+            this.Controls.Add(this.LoginInput);
             this.Controls.Add(this.PhoneInput);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.BirthDateInput);
@@ -247,5 +287,9 @@
         private System.Windows.Forms.TextBox BirthDateInput;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.TextBox textBoxSpecialtiesAddStudentForm;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.TextBox PasswordInput;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.TextBox LoginInput;
     }
 }

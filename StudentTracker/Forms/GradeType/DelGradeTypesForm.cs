@@ -18,6 +18,7 @@ namespace StudentTracker.Forms
         {
             InitializeComponent();
             LoadData();
+            this.AcceptButton = btnDelGradeTypes;
         }
         public void LoadData()
         {

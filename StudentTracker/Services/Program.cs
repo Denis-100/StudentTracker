@@ -19,14 +19,13 @@ namespace StudentTracker
 
             DatabaseInitializer.Init();
 
-            Application.Run(new Form1());
+            //Application.Run(new Form1());
 
-
-            //LoginForm login = new LoginForm();
-            //if (login.ShowDialog() == DialogResult.OK)
-            //{
-            //    Application.Run(new Form1());
-            //}
+            LoginForm login = new LoginForm();
+            if (login.ShowDialog() == DialogResult.OK)
+            {
+                Application.Run(new Form1());
+            }
         }
     }
 }
