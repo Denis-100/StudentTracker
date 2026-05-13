@@ -35,8 +35,10 @@
             // 
             // dgvDelSubjects
             // 
+            this.dgvDelSubjects.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvDelSubjects.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvDelSubjects.Dock = System.Windows.Forms.DockStyle.Left;
             this.dgvDelSubjects.Location = new System.Drawing.Point(0, 0);
             this.dgvDelSubjects.Name = "dgvDelSubjects";
             this.dgvDelSubjects.Size = new System.Drawing.Size(170, 211);
@@ -44,6 +46,7 @@
             // 
             // btnDelSubjects
             // 
+            this.btnDelSubjects.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnDelSubjects.Location = new System.Drawing.Point(200, 170);
             this.btnDelSubjects.Name = "btnDelSubjects";
             this.btnDelSubjects.Size = new System.Drawing.Size(106, 28);

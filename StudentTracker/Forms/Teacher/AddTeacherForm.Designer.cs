@@ -42,12 +42,17 @@
             this.label5 = new System.Windows.Forms.Label();
             this.PasswordTeacherInput = new System.Windows.Forms.TextBox();
             this.errorProviderAddTeacher = new System.Windows.Forms.ErrorProvider(this.components);
+            this.btnGenerateLogPas = new System.Windows.Forms.Button();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dgvTeacherAdd)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProviderAddTeacher)).BeginInit();
             this.SuspendLayout();
             // 
             // dgvTeacherAdd
             // 
+            this.dgvTeacherAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvTeacherAdd.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvTeacherAdd.Location = new System.Drawing.Point(12, 12);
             this.dgvTeacherAdd.Name = "dgvTeacherAdd";
@@ -56,9 +61,10 @@
             // 
             // btnAddTeacher
             // 
-            this.btnAddTeacher.Location = new System.Drawing.Point(349, 249);
+            this.btnAddTeacher.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnAddTeacher.Location = new System.Drawing.Point(460, 241);
             this.btnAddTeacher.Name = "btnAddTeacher";
-            this.btnAddTeacher.Size = new System.Drawing.Size(100, 27);
+            this.btnAddTeacher.Size = new System.Drawing.Size(100, 35);
             this.btnAddTeacher.TabIndex = 1;
             this.btnAddTeacher.Text = "Добавить";
             this.btnAddTeacher.UseVisualStyleBackColor = true;
@@ -66,6 +72,7 @@
             // 
             // SurNameTeacherInput
             // 
+            this.SurNameTeacherInput.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.SurNameTeacherInput.Location = new System.Drawing.Point(349, 29);
             this.SurNameTeacherInput.Name = "SurNameTeacherInput";
             this.SurNameTeacherInput.Size = new System.Drawing.Size(100, 20);
@@ -73,6 +80,7 @@
             // 
             // label1
             // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(346, 13);
             this.label1.Name = "label1";
@@ -82,6 +90,7 @@
             // 
             // label2
             // 
+            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(346, 58);
             this.label2.Name = "label2";
@@ -91,6 +100,7 @@
             // 
             // NameTeacherInput
             // 
+            this.NameTeacherInput.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.NameTeacherInput.Location = new System.Drawing.Point(349, 74);
             this.NameTeacherInput.Name = "NameTeacherInput";
             this.NameTeacherInput.Size = new System.Drawing.Size(100, 20);
@@ -98,6 +108,7 @@
             // 
             // label3
             // 
+            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(346, 102);
             this.label3.Name = "label3";
@@ -107,6 +118,7 @@
             // 
             // LastNameTeacherInput
             // 
+            this.LastNameTeacherInput.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.LastNameTeacherInput.Location = new System.Drawing.Point(349, 118);
             this.LastNameTeacherInput.Name = "LastNameTeacherInput";
             this.LastNameTeacherInput.Size = new System.Drawing.Size(100, 20);
@@ -114,6 +126,7 @@
             // 
             // label4
             // 
+            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(346, 147);
             this.label4.Name = "label4";
@@ -123,6 +136,7 @@
             // 
             // LoginTeacherInput
             // 
+            this.LoginTeacherInput.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.LoginTeacherInput.Location = new System.Drawing.Point(349, 163);
             this.LoginTeacherInput.Name = "LoginTeacherInput";
             this.LoginTeacherInput.Size = new System.Drawing.Size(100, 20);
@@ -130,6 +144,7 @@
             // 
             // label5
             // 
+            this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(346, 189);
             this.label5.Name = "label5";
@@ -139,6 +154,7 @@
             // 
             // PasswordTeacherInput
             // 
+            this.PasswordTeacherInput.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.PasswordTeacherInput.Location = new System.Drawing.Point(349, 205);
             this.PasswordTeacherInput.Name = "PasswordTeacherInput";
             this.PasswordTeacherInput.Size = new System.Drawing.Size(100, 20);
@@ -148,11 +164,23 @@
             // 
             this.errorProviderAddTeacher.ContainerControl = this;
             // 
+            // btnGenerateLogPas
+            // 
+            this.btnGenerateLogPas.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnGenerateLogPas.Location = new System.Drawing.Point(349, 241);
+            this.btnGenerateLogPas.Name = "btnGenerateLogPas";
+            this.btnGenerateLogPas.Size = new System.Drawing.Size(100, 35);
+            this.btnGenerateLogPas.TabIndex = 12;
+            this.btnGenerateLogPas.Text = "Сгенерировать \r\nлогин и пароль\r\n\r\n";
+            this.btnGenerateLogPas.UseVisualStyleBackColor = true;
+            this.btnGenerateLogPas.Click += new System.EventHandler(this.btnGenerateLogPas_Click);
+            // 
             // AddTeacherForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(551, 309);
+            this.ClientSize = new System.Drawing.Size(572, 309);
+            this.Controls.Add(this.btnGenerateLogPas);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.PasswordTeacherInput);
             this.Controls.Add(this.label4);
@@ -190,5 +218,7 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox PasswordTeacherInput;
         private System.Windows.Forms.ErrorProvider errorProviderAddTeacher;
+        private System.Windows.Forms.Button btnGenerateLogPas;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }

@@ -35,6 +35,9 @@
             // 
             // dgvGrade
             // 
+            this.dgvGrade.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvGrade.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvGrade.Location = new System.Drawing.Point(12, 12);
             this.dgvGrade.Name = "dgvGrade";
@@ -43,6 +46,7 @@
             // 
             // btnDelGrade
             // 
+            this.btnDelGrade.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnDelGrade.Location = new System.Drawing.Point(715, 291);
             this.btnDelGrade.Name = "btnDelGrade";
             this.btnDelGrade.Size = new System.Drawing.Size(113, 33);

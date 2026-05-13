@@ -2,6 +2,7 @@
 using System.Data;
 using System.Data.SqlClient;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace StudentTracker
 {
@@ -15,6 +16,9 @@ namespace StudentTracker
             InitializeComponent();
             LoadGroups();
             this.AcceptButton = btnAddStudent;
+            toolTip1.SetToolTip(this.btnGenerateLogPas, "Логин сгенерируется из первых 3-х букв имени и фамили\n" +
+                "а так же из последних 2-х цифр номера телефона.\n" +
+                "Пароль из года рождения и последних 4-х цифр телефона");
         }
 
         private void LoadGroups()
@@ -69,7 +73,52 @@ namespace StudentTracker
                     "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+        }
 
+        private void btnGenerateLogPas_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                errorProvider.Clear();
+                if (string.IsNullOrWhiteSpace(SurNameInput.Text))
+                {
+                    errorProvider.SetError(SurNameInput, "Введите фамилию!");
+                    return;
+                }
+
+                if (string.IsNullOrWhiteSpace(NameInput.Text))
+                {
+                    errorProvider.SetError(NameInput, "Введите имя!");
+                    return;
+                }
+
+                if (!BirthDateInput.MaskCompleted)
+                {
+                    errorProvider.SetError(BirthDateInput, "Введите дату рождения!");
+                    return;
+                }
+
+                if (!PhoneInput.MaskCompleted)
+                {
+                    errorProvider.SetError(PhoneInput, "Введите телефон!");
+                    return;
+                }
+            
+                string surName = SurNameInput.Text.Substring(0, 3).ToLower();
+                string name = NameInput.Text.Substring(0, 3).ToLower();
+                string phoneLog = PhoneInput.Text.Substring(PhoneInput.Text.Length - 2, 2);
+                LoginInput.Text = $"{surName}{name}_{phoneLog}";
+
+                string year = BirthDateInput.Text.Substring(0, 4);
+                string phonePass = PhoneInput.Text.Substring(PhoneInput.Text.Length - 4, 4);
+                PasswordInput.Text = $"{year}{phonePass}";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Возникла ошибка при генерации логина и пароля: {ex.Message}",
+                    "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
         }
 
         private void btnAddStudent_Click(object sender, EventArgs e)

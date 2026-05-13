@@ -49,7 +49,7 @@ namespace StudentTracker
             }
             if (SpecialityComboBoxInput.SelectedValue == null)
             {
-                errorProviderAddGroup.SetError(SpecialityComboBoxInput, "Выберите направление!");
+                errorProviderAddGroup.SetError(SpecialityComboBoxInput, "Выберите направление!\nЕсли его нет, создайте новое.");
                 return;
             }
 

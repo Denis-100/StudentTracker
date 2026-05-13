@@ -19,6 +19,9 @@ namespace StudentTracker.Forms
             InitializeComponent();
             LoadData();
             this.AcceptButton = btnAddTeacher;
+            toolTip1.SetToolTip(this.btnGenerateLogPas, "Логин сгенерируется из первых 3-х букв имени и фамили\n" +
+                "а так же из 2-х случайных чисел.\n" +
+                "Пароль сгенерируется случайно из цифр");
         }
 
         private void LoadData()
@@ -26,6 +29,38 @@ namespace StudentTracker.Forms
             dgvTeacherAdd.DataSource = DataBaseManager.GetAllTeachers();
 
             SetDefaultDGVSettings.Default(dgvTeacherAdd);
+        }
+
+        private void btnGenerateLogPas_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                errorProviderAddTeacher.Clear();
+                if (string.IsNullOrWhiteSpace(SurNameTeacherInput.Text))
+                {
+                    errorProviderAddTeacher.SetError(SurNameTeacherInput, "Введите фамилию!");
+                    return;
+                }
+
+                if (string.IsNullOrWhiteSpace(NameTeacherInput.Text))
+                {
+                    errorProviderAddTeacher.SetError(NameTeacherInput, "Введите имя!");
+                    return;
+                }
+
+                string surName = SurNameTeacherInput.Text.Substring(0, 3).ToLower();
+                string name = NameTeacherInput.Text.Substring(0, 3).ToLower();
+                Random rand = new Random();
+                LoginTeacherInput.Text = $"{surName}{name}_{rand.Next(10, 100)}";
+
+                PasswordTeacherInput.Text = $"{rand.Next(10000, 10000000)}";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Возникла ошибка при генерации логина и пароля: {ex.Message}",
+                    "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
         }
 
         private void btnAddTeacher_Click(object sender, EventArgs e)
@@ -76,9 +111,7 @@ namespace StudentTracker.Forms
 
                 OnAddTeacher?.Invoke();
                 LoadData();
-
             }
-
         }
     }
 }

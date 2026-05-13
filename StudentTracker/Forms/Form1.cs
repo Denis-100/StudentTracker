@@ -40,6 +40,26 @@ namespace StudentTracker
             }
         }
 
+        private void ApplyFilter(string columnName, string text)
+        {
+            DataTable dt = dgvMain.DataSource as DataTable;
+            if (dt == null) return;
+
+            if (string.IsNullOrWhiteSpace(text))
+            {
+                dt.DefaultView.RowFilter = "";
+            }
+            else
+            {
+                string safeText = text.Replace("'", "''");
+                try
+                {
+                    dt.DefaultView.RowFilter = $"{columnName} LIKE '%{safeText}%'";
+                }
+                catch { }
+            }
+        }
+
         private void AccessLevel()
         {
             string role = LoginForm.currentRole;
@@ -325,6 +345,18 @@ namespace StudentTracker
         {
             AvgGradeForm avgForm = new AvgGradeForm();
             avgForm.ShowDialog();
+        }
+
+        private void SeachFIOInput_TextChanged(object sender, EventArgs e)
+        {
+            string column = "ФИО";
+            ApplyFilter(column, SeachFIOInput.Text.Trim());
+        }
+
+        private void SearchSubjectInput_TextChanged(object sender, EventArgs e)
+        {
+            string column = "Предмет";
+            ApplyFilter(column, SearchSubjectInput.Text.Trim());
         }
     }
 }

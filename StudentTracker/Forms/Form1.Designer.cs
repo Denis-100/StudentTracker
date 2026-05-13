@@ -61,13 +61,20 @@
             this.toolStripSettings = new System.Windows.Forms.ToolStripDropDownButton();
             this.назначитьПредметыУчителюToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.btnProfilOpen = new System.Windows.Forms.ToolStripButton();
+            this.toolStripDropDownButton1 = new System.Windows.Forms.ToolStripDropDownButton();
+            this.поИмениToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.поПредметуToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.SeachFIOInput = new System.Windows.Forms.ToolStripTextBox();
+            this.SearchSubjectInput = new System.Windows.Forms.ToolStripTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMain)).BeginInit();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // dgvMain
             // 
-            this.dgvMain.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.dgvMain.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvMain.Location = new System.Drawing.Point(0, 28);
             this.dgvMain.Name = "dgvMain";
             this.dgvMain.RowHeadersVisible = false;
@@ -82,7 +89,8 @@
             this.toolStripAdd,
             this.toolStripDel,
             this.toolStripSettings,
-            this.btnProfilOpen});
+            this.btnProfilOpen,
+            this.toolStripDropDownButton1});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(800, 25);
@@ -121,63 +129,63 @@
             // table_users
             // 
             this.table_users.Name = "table_users";
-            this.table_users.Size = new System.Drawing.Size(180, 22);
+            this.table_users.Size = new System.Drawing.Size(162, 22);
             this.table_users.Text = "Пользователей";
             this.table_users.Click += new System.EventHandler(this.пользователейToolStripMenuItem_Click);
             // 
             // table_teachers
             // 
             this.table_teachers.Name = "table_teachers";
-            this.table_teachers.Size = new System.Drawing.Size(180, 22);
+            this.table_teachers.Size = new System.Drawing.Size(162, 22);
             this.table_teachers.Text = "Учителей";
             this.table_teachers.Click += new System.EventHandler(this.учителейToolStripMenuItem_Click);
             // 
             // table_specialties
             // 
             this.table_specialties.Name = "table_specialties";
-            this.table_specialties.Size = new System.Drawing.Size(180, 22);
+            this.table_specialties.Size = new System.Drawing.Size(162, 22);
             this.table_specialties.Text = "Направлений";
             this.table_specialties.Click += new System.EventHandler(this.направленийХToolStripMenuItem_Click_Click);
             // 
             // table_groups
             // 
             this.table_groups.Name = "table_groups";
-            this.table_groups.Size = new System.Drawing.Size(180, 22);
+            this.table_groups.Size = new System.Drawing.Size(162, 22);
             this.table_groups.Text = "Групп";
             this.table_groups.Click += new System.EventHandler(this.группToolStripMenuItem_Click);
             // 
             // table_students
             // 
             this.table_students.Name = "table_students";
-            this.table_students.Size = new System.Drawing.Size(180, 22);
+            this.table_students.Size = new System.Drawing.Size(162, 22);
             this.table_students.Text = "Студентов";
             this.table_students.Click += new System.EventHandler(this.студентовToolStripMenuItem_Click);
             // 
             // table_subjects
             // 
             this.table_subjects.Name = "table_subjects";
-            this.table_subjects.Size = new System.Drawing.Size(180, 22);
+            this.table_subjects.Size = new System.Drawing.Size(162, 22);
             this.table_subjects.Text = "Предметов";
             this.table_subjects.Click += new System.EventHandler(this.предметовToolStripMenuItem_Click);
             // 
             // table_grades
             // 
             this.table_grades.Name = "table_grades";
-            this.table_grades.Size = new System.Drawing.Size(180, 22);
+            this.table_grades.Size = new System.Drawing.Size(162, 22);
             this.table_grades.Text = "Оценок";
             this.table_grades.Click += new System.EventHandler(this.оценокToolStripMenuItem_Click);
             // 
             // table_grade_types
             // 
             this.table_grade_types.Name = "table_grade_types";
-            this.table_grade_types.Size = new System.Drawing.Size(180, 22);
+            this.table_grade_types.Size = new System.Drawing.Size(162, 22);
             this.table_grade_types.Text = "Типов оценок";
             this.table_grade_types.Click += new System.EventHandler(this.типовОценокToolStripMenuItem_Click);
             // 
             // table_avg_grade
             // 
             this.table_avg_grade.Name = "table_avg_grade";
-            this.table_avg_grade.Size = new System.Drawing.Size(180, 22);
+            this.table_avg_grade.Size = new System.Drawing.Size(162, 22);
             this.table_avg_grade.Text = "Среднего балла";
             this.table_avg_grade.Visible = false;
             this.table_avg_grade.Click += new System.EventHandler(this.table_avg_grade_Click);
@@ -343,6 +351,48 @@
             this.btnProfilOpen.Text = "Профиль";
             this.btnProfilOpen.Click += new System.EventHandler(this.btnProfilOpen_Click);
             // 
+            // toolStripDropDownButton1
+            // 
+            this.toolStripDropDownButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolStripDropDownButton1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.поИмениToolStripMenuItem,
+            this.поПредметуToolStripMenuItem});
+            this.toolStripDropDownButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripDropDownButton1.Image")));
+            this.toolStripDropDownButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripDropDownButton1.Name = "toolStripDropDownButton1";
+            this.toolStripDropDownButton1.Size = new System.Drawing.Size(55, 22);
+            this.toolStripDropDownButton1.Text = "Поиск";
+            // 
+            // поИмениToolStripMenuItem
+            // 
+            this.поИмениToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.SeachFIOInput});
+            this.поИмениToolStripMenuItem.Name = "поИмениToolStripMenuItem";
+            this.поИмениToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.поИмениToolStripMenuItem.Text = "По ФИО";
+            // 
+            // поПредметуToolStripMenuItem
+            // 
+            this.поПредметуToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.SearchSubjectInput});
+            this.поПредметуToolStripMenuItem.Name = "поПредметуToolStripMenuItem";
+            this.поПредметуToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.поПредметуToolStripMenuItem.Text = "По предмету";
+            // 
+            // SeachFIOInput
+            // 
+            this.SeachFIOInput.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.SeachFIOInput.Name = "SeachFIOInput";
+            this.SeachFIOInput.Size = new System.Drawing.Size(100, 23);
+            this.SeachFIOInput.TextChanged += new System.EventHandler(this.SeachFIOInput_TextChanged);
+            // 
+            // SearchSubjectInput
+            // 
+            this.SearchSubjectInput.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.SearchSubjectInput.Name = "SearchSubjectInput";
+            this.SearchSubjectInput.Size = new System.Drawing.Size(100, 23);
+            this.SearchSubjectInput.TextChanged += new System.EventHandler(this.SearchSubjectInput_TextChanged);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -395,6 +445,11 @@
         private System.Windows.Forms.ToolStripMenuItem назначитьПредметыУчителюToolStripMenuItem;
         private System.Windows.Forms.ToolStripButton btnProfilOpen;
         private System.Windows.Forms.ToolStripMenuItem table_avg_grade;
+        private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownButton1;
+        private System.Windows.Forms.ToolStripMenuItem поИмениToolStripMenuItem;
+        private System.Windows.Forms.ToolStripTextBox SeachFIOInput;
+        private System.Windows.Forms.ToolStripMenuItem поПредметуToolStripMenuItem;
+        private System.Windows.Forms.ToolStripTextBox SearchSubjectInput;
     }
 }
 

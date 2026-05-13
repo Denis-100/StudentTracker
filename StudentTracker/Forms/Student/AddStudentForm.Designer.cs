@@ -39,9 +39,7 @@
             this.Label3 = new System.Windows.Forms.Label();
             this.btnAddStudent = new System.Windows.Forms.Button();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
-            this.BirthDateInput = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.PhoneInput = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.EmailInput = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
@@ -51,6 +49,10 @@
             this.label9 = new System.Windows.Forms.Label();
             this.PasswordInput = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
+            this.btnGenerateLogPas = new System.Windows.Forms.Button();
+            this.PhoneInput = new System.Windows.Forms.MaskedTextBox();
+            this.BirthDateInput = new System.Windows.Forms.MaskedTextBox();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.SuspendLayout();
             // 
@@ -134,13 +136,6 @@
             // 
             this.errorProvider.ContainerControl = this;
             // 
-            // BirthDateInput
-            // 
-            this.BirthDateInput.Location = new System.Drawing.Point(12, 100);
-            this.BirthDateInput.Name = "BirthDateInput";
-            this.BirthDateInput.Size = new System.Drawing.Size(100, 20);
-            this.BirthDateInput.TabIndex = 9;
-            // 
             // label5
             // 
             this.label5.AutoSize = true;
@@ -149,13 +144,6 @@
             this.label5.Size = new System.Drawing.Size(89, 26);
             this.label5.TabIndex = 10;
             this.label5.Text = "Дата рождения \r\nгггг-мм-дд";
-            // 
-            // PhoneInput
-            // 
-            this.PhoneInput.Location = new System.Drawing.Point(131, 100);
-            this.PhoneInput.Name = "PhoneInput";
-            this.PhoneInput.Size = new System.Drawing.Size(100, 20);
-            this.PhoneInput.TabIndex = 11;
             // 
             // label6
             // 
@@ -232,11 +220,41 @@
             this.label10.TabIndex = 14;
             this.label10.Text = "Пароль";
             // 
+            // btnGenerateLogPas
+            // 
+            this.btnGenerateLogPas.Location = new System.Drawing.Point(131, 197);
+            this.btnGenerateLogPas.Name = "btnGenerateLogPas";
+            this.btnGenerateLogPas.Size = new System.Drawing.Size(100, 41);
+            this.btnGenerateLogPas.TabIndex = 17;
+            this.btnGenerateLogPas.Text = "Сгенерировать \r\nлогин и пароль\r\n";
+            this.btnGenerateLogPas.UseVisualStyleBackColor = true;
+            this.btnGenerateLogPas.Click += new System.EventHandler(this.btnGenerateLogPas_Click);
+            // 
+            // PhoneInput
+            // 
+            this.PhoneInput.Location = new System.Drawing.Point(131, 100);
+            this.PhoneInput.Mask = "+70000000000";
+            this.PhoneInput.Name = "PhoneInput";
+            this.PhoneInput.Size = new System.Drawing.Size(100, 20);
+            this.PhoneInput.TabIndex = 18;
+            // 
+            // BirthDateInput
+            // 
+            this.BirthDateInput.Location = new System.Drawing.Point(15, 99);
+            this.BirthDateInput.Mask = "0000-00-00";
+            this.BirthDateInput.Name = "BirthDateInput";
+            this.BirthDateInput.Size = new System.Drawing.Size(100, 20);
+            this.BirthDateInput.TabIndex = 19;
+            this.BirthDateInput.ValidatingType = typeof(System.DateTime);
+            // 
             // AddStudentForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(370, 248);
+            this.Controls.Add(this.BirthDateInput);
+            this.Controls.Add(this.PhoneInput);
+            this.Controls.Add(this.btnGenerateLogPas);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.textBoxSpecialtiesAddStudentForm);
             this.Controls.Add(this.label10);
@@ -246,9 +264,7 @@
             this.Controls.Add(this.label9);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.LoginInput);
-            this.Controls.Add(this.PhoneInput);
             this.Controls.Add(this.label5);
-            this.Controls.Add(this.BirthDateInput);
             this.Controls.Add(this.btnAddStudent);
             this.Controls.Add(this.Label3);
             this.Controls.Add(this.LastNameInput);
@@ -282,14 +298,16 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox EmailInput;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox PhoneInput;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox BirthDateInput;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.TextBox textBoxSpecialtiesAddStudentForm;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.TextBox PasswordInput;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.TextBox LoginInput;
+        private System.Windows.Forms.Button btnGenerateLogPas;
+        private System.Windows.Forms.MaskedTextBox PhoneInput;
+        private System.Windows.Forms.MaskedTextBox BirthDateInput;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }

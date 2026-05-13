@@ -35,10 +35,10 @@
             // 
             // dgvSpecialtiesDel
             // 
-            this.dgvSpecialtiesDel.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
-            this.dgvSpecialtiesDel.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dgvSpecialtiesDel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvSpecialtiesDel.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvSpecialtiesDel.Dock = System.Windows.Forms.DockStyle.Left;
             this.dgvSpecialtiesDel.Location = new System.Drawing.Point(0, 0);
             this.dgvSpecialtiesDel.Name = "dgvSpecialtiesDel";
             this.dgvSpecialtiesDel.RowHeadersVisible = false;
@@ -47,6 +47,7 @@
             // 
             // btnDelSpecilties
             // 
+            this.btnDelSpecilties.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnDelSpecilties.Location = new System.Drawing.Point(248, 198);
             this.btnDelSpecilties.Name = "btnDelSpecilties";
             this.btnDelSpecilties.Size = new System.Drawing.Size(117, 36);

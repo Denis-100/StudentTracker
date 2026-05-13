@@ -54,28 +54,35 @@ namespace StudentTracker.Forms.Profiles
                     int id = LoginForm.currentId;
                     string sql;
 
+                    long newSalt = SecurityHelper.GenerateRandomSalt();
+                    string newPassword = SecurityHelper.HashPassword(pass2, newSalt);
+
                     if (role.Equals("Admin"))
                     {
                         sql = @"UPDATE Users
-                                SET Password = @Password
+                                SET Password = @Password, 
+                                Salt = @Salt
                                 WHERE Role = 'Admin'";
                     }
                     else if (role.Equals("Teacher"))
                     {
                         sql = @"UPDATE Users
-                                SET Password = @Password
+                                SET Password = @Password, 
+                                Salt = @Salt
                                 WHERE IdTeacher = @Id";
                     }
                     else
                     {
                         sql = @"UPDATE Users
-                                SET Password = @Password
+                                SET Password = @Password, 
+                                Salt = @Salt
                                 WHERE IdStudent = @Id";
                     }
 
                     using (SqlCommand cmd = new SqlCommand(sql, conn))
                     {
-                        cmd.Parameters.AddWithValue("@Password", SecurityHelper.HashPassword(pass2));
+                        cmd.Parameters.AddWithValue("@Password", newPassword);
+                        cmd.Parameters.AddWithValue("@Salt", newSalt);
                         cmd.Parameters.AddWithValue("@Id", id);
                         cmd.ExecuteNonQuery();
                         MessageBox.Show("Вы успешно поменяли пароль!");

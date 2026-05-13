@@ -40,8 +40,10 @@
             // 
             // dgvAddSubjects
             // 
+            this.dgvAddSubjects.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvAddSubjects.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvAddSubjects.Dock = System.Windows.Forms.DockStyle.Left;
             this.dgvAddSubjects.Location = new System.Drawing.Point(0, 0);
             this.dgvAddSubjects.Name = "dgvAddSubjects";
             this.dgvAddSubjects.Size = new System.Drawing.Size(170, 211);
@@ -49,6 +51,7 @@
             // 
             // btnAddSubjects
             // 
+            this.btnAddSubjects.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnAddSubjects.Location = new System.Drawing.Point(200, 170);
             this.btnAddSubjects.Name = "btnAddSubjects";
             this.btnAddSubjects.Size = new System.Drawing.Size(106, 28);
@@ -59,6 +62,7 @@
             // 
             // NameSubjectsInput
             // 
+            this.NameSubjectsInput.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.NameSubjectsInput.Location = new System.Drawing.Point(200, 144);
             this.NameSubjectsInput.Name = "NameSubjectsInput";
             this.NameSubjectsInput.Size = new System.Drawing.Size(106, 20);
@@ -66,6 +70,7 @@
             // 
             // label1
             // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(200, 125);
             this.label1.Name = "label1";

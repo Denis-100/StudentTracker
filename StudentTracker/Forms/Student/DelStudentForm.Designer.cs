@@ -35,7 +35,9 @@
             // 
             // dgvStudentDel
             // 
-            this.dgvStudentDel.Dock = System.Windows.Forms.DockStyle.Left;
+            this.dgvStudentDel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvStudentDel.GridColor = System.Drawing.SystemColors.Control;
             this.dgvStudentDel.Location = new System.Drawing.Point(0, 0);
             this.dgvStudentDel.Name = "dgvStudentDel";
@@ -45,6 +47,7 @@
             // 
             // btnDelStudent
             // 
+            this.btnDelStudent.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnDelStudent.Location = new System.Drawing.Point(783, 12);
             this.btnDelStudent.Name = "btnDelStudent";
             this.btnDelStudent.Size = new System.Drawing.Size(106, 53);

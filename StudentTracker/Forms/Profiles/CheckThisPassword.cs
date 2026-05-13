@@ -31,19 +31,18 @@ namespace StudentTracker.Forms.Profiles
             try
             {
                 string sql;
-                string password;
 
                 if (LoginForm.currentRole.Equals("Teacher"))
                 {
-                    sql = "SELECT Password FROM Users WHERE IdTeacher = @Id";
+                    sql = "SELECT Password, Salt FROM Users WHERE IdTeacher = @Id";
                 }
                 else if (LoginForm.currentRole.Equals("Student"))
                 {
-                    sql = "SELECT Password FROM Users WHERE IdStudent = @Id";
+                    sql = "SELECT Password, Salt FROM Users WHERE IdStudent = @Id";
                 }
                 else
                 {
-                    sql = "SELECT Password FROM Users WHERE Role = 'Admin'";
+                    sql = "SELECT Password, Salt FROM Users WHERE Role = 'Admin'";
                 }
                 using (SqlConnection conn = new SqlConnection(DatabaseInitializer.getConnectionString()))
                 {
@@ -51,18 +50,25 @@ namespace StudentTracker.Forms.Profiles
                     using (SqlCommand cmd = new SqlCommand(sql, conn))
                     {
                         cmd.Parameters.AddWithValue("@Id", LoginForm.currentId);
-                        password = cmd.ExecuteScalar().ToString();
-                    }
+                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                string password = reader["Password"].ToString();
+                                long salt = Convert.ToInt64(reader["Salt"]);
 
-                    if (SecurityHelper.HashPassword(PasswordInput.Text) == password)
-                    {
-                        ChangePasswordForm changePasswordForm = new ChangePasswordForm();
-                        changePasswordForm.ShowDialog();
-                        this.DialogResult = DialogResult.OK;
-                    }
-                    else
-                    {
-                        MessageBox.Show("Неверный пароль");
+                                if (SecurityHelper.HashPassword(PasswordInput.Text, salt) == password)
+                                {
+                                    ChangePasswordForm changePasswordForm = new ChangePasswordForm();
+                                    changePasswordForm.ShowDialog();
+                                    this.DialogResult = DialogResult.OK;
+                                }
+                                else
+                                {
+                                    MessageBox.Show("Неверный пароль");
+                                } 
+                            }
+                        }
                     }
                 }
             }

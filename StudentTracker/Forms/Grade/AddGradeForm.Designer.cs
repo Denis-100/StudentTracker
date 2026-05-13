@@ -89,7 +89,7 @@
             // 
             // btnAddGrade
             // 
-            this.btnAddGrade.Location = new System.Drawing.Point(264, 246);
+            this.btnAddGrade.Location = new System.Drawing.Point(302, 246);
             this.btnAddGrade.Name = "btnAddGrade";
             this.btnAddGrade.Size = new System.Drawing.Size(75, 23);
             this.btnAddGrade.TabIndex = 4;
@@ -139,7 +139,7 @@
             // 
             this.GradeInput.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.GradeInput.FormattingEnabled = true;
-            this.GradeInput.Location = new System.Drawing.Point(139, 145);
+            this.GradeInput.Location = new System.Drawing.Point(160, 145);
             this.GradeInput.Name = "GradeInput";
             this.GradeInput.Size = new System.Drawing.Size(46, 21);
             this.GradeInput.TabIndex = 2;
@@ -147,7 +147,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(136, 126);
+            this.label5.Location = new System.Drawing.Point(157, 126);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(45, 13);
             this.label5.TabIndex = 3;
@@ -157,7 +157,7 @@
             // 
             this.GradeTypeInput.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.GradeTypeInput.FormattingEnabled = true;
-            this.GradeTypeInput.Location = new System.Drawing.Point(191, 145);
+            this.GradeTypeInput.Location = new System.Drawing.Point(231, 145);
             this.GradeTypeInput.Name = "GradeTypeInput";
             this.GradeTypeInput.Size = new System.Drawing.Size(148, 21);
             this.GradeTypeInput.TabIndex = 2;
@@ -165,7 +165,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(188, 126);
+            this.label6.Location = new System.Drawing.Point(228, 126);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(65, 13);
             this.label6.TabIndex = 3;
@@ -178,15 +178,15 @@
             // DateInput
             // 
             this.DateInput.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.DateInput.Location = new System.Drawing.Point(191, 202);
+            this.DateInput.Location = new System.Drawing.Point(231, 202);
             this.DateInput.Name = "DateInput";
-            this.DateInput.Size = new System.Drawing.Size(129, 20);
+            this.DateInput.Size = new System.Drawing.Size(146, 20);
             this.DateInput.TabIndex = 7;
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(188, 183);
+            this.label7.Location = new System.Drawing.Point(228, 183);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(33, 13);
             this.label7.TabIndex = 3;
@@ -195,7 +195,7 @@
             // TeacherText
             // 
             this.TeacherText.AutoSize = true;
-            this.TeacherText.Location = new System.Drawing.Point(136, 22);
+            this.TeacherText.Location = new System.Drawing.Point(157, 75);
             this.TeacherText.Name = "TeacherText";
             this.TeacherText.Size = new System.Drawing.Size(49, 13);
             this.TeacherText.TabIndex = 1;
@@ -205,9 +205,9 @@
             // 
             this.TeacherInput.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.TeacherInput.FormattingEnabled = true;
-            this.TeacherInput.Location = new System.Drawing.Point(139, 38);
+            this.TeacherInput.Location = new System.Drawing.Point(160, 91);
             this.TeacherInput.Name = "TeacherInput";
-            this.TeacherInput.Size = new System.Drawing.Size(200, 21);
+            this.TeacherInput.Size = new System.Drawing.Size(217, 21);
             this.TeacherInput.TabIndex = 8;
             this.TeacherInput.SelectedIndexChanged += new System.EventHandler(this.TeacherInput_SelectedIndexChanged);
             // 
@@ -215,7 +215,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(345, 281);
+            this.ClientSize = new System.Drawing.Size(398, 281);
             this.Controls.Add(this.TeacherInput);
             this.Controls.Add(this.DateInput);
             this.Controls.Add(this.label3);

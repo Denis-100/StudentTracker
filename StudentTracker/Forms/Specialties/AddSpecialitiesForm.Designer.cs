@@ -40,10 +40,10 @@
             // 
             // dgvSpecialtiesAdd
             // 
-            this.dgvSpecialtiesAdd.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
-            this.dgvSpecialtiesAdd.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dgvSpecialtiesAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvSpecialtiesAdd.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvSpecialtiesAdd.Dock = System.Windows.Forms.DockStyle.Left;
             this.dgvSpecialtiesAdd.Location = new System.Drawing.Point(0, 0);
             this.dgvSpecialtiesAdd.Name = "dgvSpecialtiesAdd";
             this.dgvSpecialtiesAdd.RowHeadersVisible = false;
@@ -52,6 +52,7 @@
             // 
             // SpecialtiNameInput
             // 
+            this.SpecialtiNameInput.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.SpecialtiNameInput.Location = new System.Drawing.Point(246, 174);
             this.SpecialtiNameInput.Name = "SpecialtiNameInput";
             this.SpecialtiNameInput.Size = new System.Drawing.Size(117, 20);
@@ -59,6 +60,7 @@
             // 
             // label1
             // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(243, 158);
             this.label1.Name = "label1";
@@ -68,6 +70,7 @@
             // 
             // btnAddSpecialies
             // 
+            this.btnAddSpecialies.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnAddSpecialies.Location = new System.Drawing.Point(246, 200);
             this.btnAddSpecialies.Name = "btnAddSpecialies";
             this.btnAddSpecialies.Size = new System.Drawing.Size(117, 36);

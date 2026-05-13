@@ -1,4 +1,5 @@
-﻿using System;
+﻿using StudentTracker;
+using System;
 using System.Data.SqlClient;
 using System.Windows.Forms;
 
@@ -93,6 +94,7 @@ public static class DatabaseInitializer
                                 Id INT PRIMARY KEY IDENTITY,
                                 Login NVARCHAR(50) NOT NULL UNIQUE,
                                 Password NVARCHAR(MAX) NOT NULL,
+                                Salt BIGINT NOT NULL,
                                 Role NVARCHAR(20) NOT NULL,
                                 IdTeacher INT REFERENCES Teachers(Id) ON DELETE SET NULL,
                                 IdStudent INT REFERENCES Students(Id) ON DELETE SET NULL
@@ -136,15 +138,24 @@ public static class DatabaseInitializer
         {
             conn.Open();
 
-            string sql = @"IF NOT EXISTS (SELECT 1 FROM Users WHERE Login = 'admin')
-                           BEGIN
-                                INSERT INTO Users (Login, Password, Role)
-                                VALUES ('admin', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918', 'Admin')
-                           END";
+            string sqlCheck = @"SELECT 1 FROM Users WHERE Login = 'admin'";
 
-            using (SqlCommand command = new SqlCommand(sql, conn))
+            using (SqlCommand command = new SqlCommand(sqlCheck, conn))
             {
-                command.ExecuteNonQuery();
+                if (command.ExecuteScalar() != null) return;
+            }
+
+            long salt = SecurityHelper.GenerateRandomSalt();
+            string pass = SecurityHelper.HashPassword("admin", salt);
+
+            string sql = @"INSERT INTO Users (Login, Password, Salt, Role)
+                           VALUES ('admin', @Password, @Salt, 'Admin')";
+
+            using (SqlCommand cmd = new SqlCommand(sql, conn))
+            {
+                cmd.Parameters.AddWithValue("@Password", pass);
+                cmd.Parameters.AddWithValue("@Salt", salt);
+                cmd.ExecuteNonQuery();
             }
         }
     }

@@ -50,7 +50,7 @@ namespace StudentTracker.Forms.Grade
             }
             catch(Exception ex)
             {
-                MessageBox.Show($"Возникла ошибка при загрузке данных о группах: {ex.Message}",
+                MessageBox.Show($"Возникла ошибка при загрузке данных о группах: {ex.Message}\nПроверьте, создана ли хоть 1 группа.",
                     "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
@@ -79,6 +79,15 @@ namespace StudentTracker.Forms.Grade
                             StudentInput.DataSource = dt;
                             StudentInput.DisplayMember = "FIO";
                             StudentInput.ValueMember = "Id";
+
+                            if (dt.Rows.Count == 0)
+                            {
+                                errorProviderAddGrade.SetError(StudentInput, "Добавьте студентов!");
+                            }
+                            else
+                            {
+                                errorProviderAddGrade.SetError(StudentInput, "");
+                            }
                         }
                     }
                 }
@@ -140,6 +149,15 @@ namespace StudentTracker.Forms.Grade
                         SubjectInput.DataSource = dt;
                         SubjectInput.DisplayMember = "Name";
                         SubjectInput.ValueMember = "Id";
+
+                        if (dt.Rows.Count == 0)
+                        {
+                            errorProviderAddGrade.SetError(SubjectInput, "Добавьте предметы!");
+                        }
+                        else
+                        {
+                            errorProviderAddGrade.SetError(SubjectInput, "");
+                        }
                     }
                     
                 }
@@ -176,6 +194,15 @@ namespace StudentTracker.Forms.Grade
                         GradeTypeInput.DataSource = dt;
                         GradeTypeInput.DisplayMember = "Name";
                         GradeTypeInput.ValueMember = "Id";
+
+                        if (dt.Rows.Count == 0)
+                        {
+                            errorProviderAddGrade.SetError(GradeTypeInput, "Добавьте типы оценок!");
+                        }
+                        else
+                        {
+                            errorProviderAddGrade.SetError(GradeTypeInput, "");
+                        }
                     }
                 }
             }
@@ -202,20 +229,43 @@ namespace StudentTracker.Forms.Grade
             }
         }
 
+        private void TeacherInput_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            LoadSubjects();
+        }
+
         private void btnAddGrade_Click(object sender, EventArgs e)
         {
             errorProviderAddGrade.Clear();
+
+            // Проверка выбран ли студент
+            if (StudentInput.SelectedValue == null || StudentInput.SelectedValue is DataRowView)
+            {
+                MessageBox.Show("Невозможно добавить оценку, так как в группе нет студентов!", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                errorProviderAddGrade.SetError(StudentInput, "Добавьте студентов!");
+                return;
+            }
+
             if (GradeInput.SelectedItem == null)
             {
                 errorProviderAddGrade.SetError(GradeInput, "Выберите оценку!");
                 return;
             }
+
             try
             {
                 int idStudent = Convert.ToInt32(StudentInput.SelectedValue);
                 int idSubject = Convert.ToInt32(SubjectInput.SelectedValue);
                 int idGradeType = Convert.ToInt32(GradeTypeInput.SelectedValue);
-                int idTeacher = Convert.ToInt32(TeacherInput.SelectedValue);
+                int idTeacher;
+                if (LoginForm.currentRole.Equals("Admin"))
+                {
+                    idTeacher = Convert.ToInt32(TeacherInput.SelectedValue);
+                }
+                else
+                {
+                    idTeacher = LoginForm.currentId;
+                }
                 int grade = Convert.ToInt32(GradeInput.SelectedItem);
                 string academYear = AcademYearInput.SelectedItem.ToString();
                 DateTime date = DateInput.Value;
@@ -232,11 +282,6 @@ namespace StudentTracker.Forms.Grade
                 return;
             }
             
-        }
-
-        private void TeacherInput_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            LoadSubjects();
         }
     }
 }

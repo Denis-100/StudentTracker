@@ -42,6 +42,7 @@
             // 
             // GroupNameInput
             // 
+            this.GroupNameInput.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.GroupNameInput.Location = new System.Drawing.Point(304, 30);
             this.GroupNameInput.Name = "GroupNameInput";
             this.GroupNameInput.Size = new System.Drawing.Size(130, 20);
@@ -49,6 +50,7 @@
             // 
             // label1
             // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(304, 11);
             this.label1.Name = "label1";
@@ -58,6 +60,7 @@
             // 
             // btnGroupAdd
             // 
+            this.btnGroupAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnGroupAdd.Location = new System.Drawing.Point(304, 117);
             this.btnGroupAdd.Name = "btnGroupAdd";
             this.btnGroupAdd.Size = new System.Drawing.Size(130, 35);
@@ -68,10 +71,10 @@
             // 
             // GroupListAdd
             // 
-            this.GroupListAdd.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
-            this.GroupListAdd.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.GroupListAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.GroupListAdd.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.GroupListAdd.Dock = System.Windows.Forms.DockStyle.Left;
             this.GroupListAdd.Location = new System.Drawing.Point(0, 0);
             this.GroupListAdd.Name = "GroupListAdd";
             this.GroupListAdd.RowHeadersVisible = false;
@@ -80,6 +83,7 @@
             // 
             // label2
             // 
+            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(304, 61);
             this.label2.Name = "label2";
@@ -89,6 +93,7 @@
             // 
             // SpecialityComboBoxInput
             // 
+            this.SpecialityComboBoxInput.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.SpecialityComboBoxInput.FormattingEnabled = true;
             this.SpecialityComboBoxInput.Location = new System.Drawing.Point(304, 77);
             this.SpecialityComboBoxInput.Name = "SpecialityComboBoxInput";

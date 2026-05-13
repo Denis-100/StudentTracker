@@ -121,12 +121,17 @@ public static class DataBaseManager
                         return false;
                     }
 
-                    string sqlAddUser = "INSERT INTO Users (Login, Password, Role, IdTeacher) " +
-                        "VALUES (@Login, @Password, @Role, @IdTeacher)";
+                    string sqlAddUser = "INSERT INTO Users (Login, Password, Salt, Role, IdTeacher) " +
+                        "VALUES (@Login, @Password, @Salt, @Role, @IdTeacher)";
+
+                    long salt = SecurityHelper.GenerateRandomSalt();
+                    string passwordHash = SecurityHelper.HashPassword(Password, salt);
+
                     using (SqlCommand cmd = new SqlCommand(sqlAddUser, conn))
                     {
                         cmd.Parameters.AddWithValue("@Login", Login);
-                        cmd.Parameters.AddWithValue("@Password", SecurityHelper.HashPassword(Password));
+                        cmd.Parameters.AddWithValue("@Password", passwordHash);
+                        cmd.Parameters.AddWithValue("@Salt", salt);
                         cmd.Parameters.AddWithValue("@Role", "Teacher");
                         cmd.Parameters.AddWithValue("@IdTeacher", idNewTeacher);
                         cmd.ExecuteNonQuery();
@@ -152,14 +157,13 @@ public static class DataBaseManager
     {
         try
         {
+            if (dgvTeachers.CurrentRow == null) return false;
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 conn.Open();
 
                 int idTeacher = (int)dgvTeachers.CurrentRow.Cells["Id"].Value;
-                string fullName = dgvTeachers.CurrentRow.Cells["Фамилия"].Value.ToString() +
-                    " " + dgvTeachers.CurrentRow.Cells["Имя"].Value.ToString() +
-                    " " + dgvTeachers.CurrentRow.Cells["Отчество"].Value.ToString();
+                string fullName = dgvTeachers.CurrentRow.Cells["ФИО"].Value.ToString();
 
                 var confirm = MessageBox.Show($"Удалить учителя {fullName}?", "Подтверждение",
                     MessageBoxButtons.YesNo, MessageBoxIcon.Question);
@@ -249,6 +253,7 @@ public static class DataBaseManager
     {
         try
         {
+            if (dgvSpecilties.CurrentRow == null) return false;
             int id = Convert.ToInt32(dgvSpecilties.CurrentRow.Cells["Id"].Value);
             string nameSpec = dgvSpecilties.CurrentRow.Cells["Название"].Value.ToString().Trim();
 
@@ -343,6 +348,7 @@ public static class DataBaseManager
     {
         try
         {
+            if (dgvGroup.CurrentRow == null) return false;
             int id = Convert.ToInt32(dgvGroup.CurrentRow.Cells["Id"].Value);
             string nameGroup = dgvGroup.CurrentRow.Cells["Название"].Value.ToString().Trim();
 
@@ -434,7 +440,7 @@ public static class DataBaseManager
                 string sql = "INSERT INTO Students " +
                     "(SurName, Name, LastName, BirthDate, Phone, Email, IdGroup) " +
                     "VALUES " +
-                    "(@surname, @name, @lastname, @birthdate, @phone, @email, @idgroup)" +
+                    "(@surname, @name, @lastname, @birthdate, @phone, @email, @idgroup);" +
                     "SELECT SCOPE_IDENTITY()";
                 using (SqlCommand cmd = new SqlCommand(sql, conn))
                 {
@@ -449,12 +455,17 @@ public static class DataBaseManager
                     newIdStudent = Convert.ToInt32(cmd.ExecuteScalar());
                 }
 
-                string sqlAdd = "INSERT INTO Users (Login, Password, Role, IdStudent) " +
-                    "VALUES (@Login, @Password, @Role, @IdStudent)";
+                string sqlAdd = "INSERT INTO Users (Login, Password, Salt, Role, IdStudent) " +
+                    "VALUES (@Login, @Password, @Salt, @Role, @IdStudent)";
+
+                long salt = SecurityHelper.GenerateRandomSalt();
+                string passwordHash = SecurityHelper.HashPassword(Password, salt);
+
                 using (SqlCommand cmd = new SqlCommand(sqlAdd, conn))
                 {
                     cmd.Parameters.AddWithValue("@Login", Login);
-                    cmd.Parameters.AddWithValue("@Password", SecurityHelper.HashPassword(Password));
+                    cmd.Parameters.AddWithValue("@Password", passwordHash);
+                    cmd.Parameters.AddWithValue("@Salt", salt);
                     cmd.Parameters.AddWithValue("@Role", "Student");
                     cmd.Parameters.AddWithValue("@IdStudent", newIdStudent);
                     cmd.ExecuteNonQuery();
@@ -581,6 +592,7 @@ public static class DataBaseManager
     {
         try
         {
+            if (dgv.CurrentRow == null) return false;
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 conn.Open();
@@ -713,6 +725,7 @@ public static class DataBaseManager
     {
         try
         {
+            if (dgvGrade.CurrentRow == null) return false;
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 conn.Open();
@@ -805,6 +818,7 @@ public static class DataBaseManager
     {
         try
         {
+            if (dgvGradeTypes.CurrentRow == null) return false;
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 conn.Open();

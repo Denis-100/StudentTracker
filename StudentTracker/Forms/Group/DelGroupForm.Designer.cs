@@ -35,10 +35,10 @@
             // 
             // GroupListDel
             // 
-            this.GroupListDel.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
-            this.GroupListDel.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.GroupListDel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.GroupListDel.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.GroupListDel.Dock = System.Windows.Forms.DockStyle.Left;
             this.GroupListDel.Location = new System.Drawing.Point(0, 0);
             this.GroupListDel.Name = "GroupListDel";
             this.GroupListDel.RowHeadersVisible = false;
@@ -47,6 +47,7 @@
             // 
             // btnDeleteGroup
             // 
+            this.btnDeleteGroup.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnDeleteGroup.Location = new System.Drawing.Point(269, 12);
             this.btnDeleteGroup.Name = "btnDeleteGroup";
             this.btnDeleteGroup.Size = new System.Drawing.Size(130, 35);

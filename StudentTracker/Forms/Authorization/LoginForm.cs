@@ -25,36 +25,45 @@ namespace StudentTracker
         {
             if (!IsValid()) return;
 
-            string enterPassword = SecurityHelper.HashPassword(PasswordInput.Text);
             try
             {
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 {
                     conn.Open();
-                    int id;
-                    string sql = "SELECT Role, IdTeacher, IdStudent FROM Users WHERE Login = @login AND Password = @password";
+
+                    string sql = "SELECT Password, Salt, Role, IdTeacher, IdStudent FROM Users WHERE Login = @login";
                     using (SqlCommand command = new SqlCommand(sql, conn))
                     {
                         command.Parameters.AddWithValue("@login", LoginInput.Text);
-                        command.Parameters.AddWithValue("@password", enterPassword);
 
                         using (SqlDataReader reader = command.ExecuteReader())
                         {
                             if (reader.Read())
                             {
-                                string role = reader["Role"].ToString();
-                                currentRole = role;
+                                long salt = Convert.ToInt64(reader["Salt"]);
+                                string pass = reader["Password"].ToString();
 
-                                if (role.Equals("Teacher")) currentId = Convert.ToInt32(reader["IdTeacher"]);
-                                else if (role.Equals("Student")) currentId = Convert.ToInt32(reader["IdStudent"]);
+                                string passwordHash = SecurityHelper.HashPassword(PasswordInput.Text, salt);
+                                if (pass.Equals(passwordHash))
+                                {
+                                    string role = reader["Role"].ToString();
+                                    currentRole = role;
+
+                                    if (role.Equals("Teacher")) currentId = Convert.ToInt32(reader["IdTeacher"]);
+                                    else if (role.Equals("Student")) currentId = Convert.ToInt32(reader["IdStudent"]);
+                                    else
+                                    {
+                                        checkPassAdmin();
+                                        currentId = -1;
+                                    }
+
+                                    MessageBox.Show($"Добро пожаловать, {role}");
+                                    this.DialogResult = DialogResult.OK;
+                                }
                                 else
                                 {
-                                    checkPassAdmin();
-                                    currentId = -1;
+                                    MessageBox.Show("Неверный логин или пароль!");
                                 }
-
-                                MessageBox.Show($"Добро пожаловать, {role}");
-                                this.DialogResult = DialogResult.OK;
                             }
                             else
                             {
@@ -103,15 +112,24 @@ namespace StudentTracker
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 conn.Open();
-                string sql = "SELECT Password FROM Users WHERE Role = 'Admin'";
+                string sql = "SELECT Password, Salt FROM Users WHERE Role = 'Admin'";
 
                 SqlCommand cmd = new SqlCommand(sql, conn);
-                string pas = cmd.ExecuteScalar().ToString();
-                if (pas.Equals(SecurityHelper.HashPassword("admin")))
+
+                using (SqlDataReader reader = cmd.ExecuteReader())
                 {
-                    MessageBox.Show("Администратор, смените пароль для безопасности!");
-                    ChangePasswordForm changePasswordForm = new ChangePasswordForm();
-                    changePasswordForm.ShowDialog();
+                    if (reader.Read())
+                    {
+                        string password = reader["Password"].ToString();
+                        long salt = Convert.ToInt64(reader["Salt"]);
+
+                        if (password.Equals(SecurityHelper.HashPassword("admin", salt)))
+                        {
+                            MessageBox.Show("Администратор, смените пароль для безопасности!");
+                            ChangePasswordForm changePasswordForm = new ChangePasswordForm();
+                            changePasswordForm.ShowDialog();
+                        }
+                    }
                 }
             }
         }

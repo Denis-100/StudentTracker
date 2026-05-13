@@ -35,6 +35,9 @@
             // 
             // dgvTeacherDel
             // 
+            this.dgvTeacherDel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvTeacherDel.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvTeacherDel.Location = new System.Drawing.Point(12, 12);
             this.dgvTeacherDel.Name = "dgvTeacherDel";
@@ -43,6 +46,7 @@
             // 
             // btnDelTeacher
             // 
+            this.btnDelTeacher.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnDelTeacher.Location = new System.Drawing.Point(346, 240);
             this.btnDelTeacher.Name = "btnDelTeacher";
             this.btnDelTeacher.Size = new System.Drawing.Size(108, 36);

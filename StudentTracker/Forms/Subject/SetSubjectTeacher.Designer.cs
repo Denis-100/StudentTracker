@@ -36,6 +36,9 @@
             // 
             // SubjectsSet
             // 
+            this.SubjectsSet.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.SubjectsSet.CheckOnClick = true;
             this.SubjectsSet.FormattingEnabled = true;
             this.SubjectsSet.Location = new System.Drawing.Point(12, 91);
@@ -46,6 +49,9 @@
             // 
             // label1
             // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(13, 72);
             this.label1.Name = "label1";
@@ -55,6 +61,8 @@
             // 
             // label2
             // 
+            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(13, 9);
             this.label2.Name = "label2";
@@ -64,6 +72,8 @@
             // 
             // TeacherInput
             // 
+            this.TeacherInput.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.TeacherInput.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.TeacherInput.FormattingEnabled = true;
             this.TeacherInput.Location = new System.Drawing.Point(12, 26);
@@ -82,6 +92,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.SubjectsSet);
             this.Name = "SetSubjectTeacher";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Настроить предметы учителя";
             this.ResumeLayout(false);
             this.PerformLayout();
