@@ -53,12 +53,16 @@ public static class DataBaseManager
     public static DataTable GetAllTeachers()
     {
         
-        string sql = "SELECT Id," +
-                    "SurName + ' ' + Name + ' ' + LastName AS [ФИО] FROM Teachers";
+        string sql = @"SELECT Id, 
+                       SurName + ' ' + Name + ' ' + LastName AS [ФИО],
+                       BirthDate AS [Дата рождения],
+                       Phone AS [Телефон],
+                       Email AS [Почта]
+                       FROM Teachers";
         return GetAllMethod(sql);
     }
 
-    public static bool AddTeacher(string SurName, string Name, string LastName,
+    public static bool AddTeacher(string SurName, string Name, string LastName, string BirthDate, string Phone, string Email,
         string Login, string Password)
     {
         try
@@ -81,13 +85,14 @@ public static class DataBaseManager
                 }
 
                 string sqlCheck = "SELECT TOP 1 1 FROM Teachers " +
-                    "WHERE SurName = @SurName AND Name = @Name AND LastName = @LastName";
+                    "WHERE SurName = @SurName AND Name = @Name AND LastName = @LastName AND Email = @Email";
 
                 using (SqlCommand cmd = new SqlCommand(sqlCheck, conn))
                 {
                     cmd.Parameters.AddWithValue("@SurName", SurName);
                     cmd.Parameters.AddWithValue("@Name", Name);
                     cmd.Parameters.AddWithValue("@LastName", LastName);
+                    cmd.Parameters.AddWithValue("@Email", Email);
                     var res = cmd.ExecuteScalar();
 
                     if (res != null) 
@@ -102,14 +107,17 @@ public static class DataBaseManager
 
                     int idNewTeacher = -1;
                     string sqlAdd = "INSERT INTO Teachers " +
-                                        "(SurName, Name, LastName) " +
+                                        "(SurName, Name, LastName, BirthDate, Phone, Email) " +
                                         "OUTPUT INSERTED.Id " +
-                                        "VALUES (@SurName, @Name, @LastName)";
+                                        "VALUES (@SurName, @Name, @LastName, @BirthDate, @Phone, @Email)";
                     using (SqlCommand cmd = new SqlCommand(sqlAdd, conn))
                     {
                         cmd.Parameters.AddWithValue("@SurName", SurName);
                         cmd.Parameters.AddWithValue("@Name", Name);
                         cmd.Parameters.AddWithValue("@LastName", LastName);
+                        cmd.Parameters.AddWithValue("@BirthDate", BirthDate);
+                        cmd.Parameters.AddWithValue("@Phone", Phone);
+                        cmd.Parameters.AddWithValue("@Email", Email);
 
                         idNewTeacher = (int)cmd.ExecuteScalar();
                     }

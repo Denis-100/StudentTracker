@@ -91,11 +91,29 @@ namespace StudentTracker.Forms
                 errorProviderAddTeacher.SetError(PasswordTeacherInput, "Введите пароль!");
                 return;
             }
+            if (string.IsNullOrWhiteSpace(EmailInput.Text))
+            {
+                errorProviderAddTeacher.SetError(EmailInput, "Введите почту!");
+                return;
+            }
+            if (!PhoneInput.MaskCompleted)
+            {
+                errorProviderAddTeacher.SetError(PhoneInput, "Введите телефон!");
+                return;
+            }
+            if (!BirthDateInput.MaskCompleted)
+            {
+                errorProviderAddTeacher.SetError(BirthDateInput, "Введите дату рождения!");
+                return;
+            }
 
             bool result = DataBaseManager.AddTeacher(
                 SurNameTeacherInput.Text.Trim(),
                 NameTeacherInput.Text.Trim(),
                 LastNameTeacherInput.Text.Trim(),
+                BirthDateInput.Text.Trim(),
+                PhoneInput.Text.Trim(),
+                EmailInput.Text.Trim(),
                 LoginTeacherInput.Text.Trim(),
                 PasswordTeacherInput.Text.Trim()
                 );
@@ -105,6 +123,9 @@ namespace StudentTracker.Forms
                 SurNameTeacherInput.Clear();
                 NameTeacherInput.Clear();
                 LastNameTeacherInput.Clear();
+                BirthDateInput.Clear();
+                PhoneInput.Clear();
+                EmailInput.Clear();
                 LoginTeacherInput.Clear();
                 PasswordTeacherInput.Clear();
 

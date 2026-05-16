@@ -61,7 +61,10 @@ public static class DatabaseInitializer
                                 Id INT PRIMARY KEY IDENTITY,
                                 SurName NVARCHAR(30) NOT NULL,
                                 Name NVARCHAR(30) NOT NULL,
-                                LastName NVARCHAR(30) NOT NULL DEFAULT ''
+                                LastName NVARCHAR(30) NOT NULL DEFAULT '',
+                                BirthDate DATE NOT NULL, 
+                                Phone NVARCHAR(20) NOT NULL DEFAULT '', 
+                                Email NVARCHAR(50) NOT NULL DEFAULT ''
                             )
 
                             IF NOT EXISTS (SELECT * FROM sys.tables WHERE name = 'GradeTypes')
