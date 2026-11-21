@@ -26,9 +26,17 @@
 - **Microsoft SQL Server LocalDB**
 - **ADO.NET** (`System.Data.SqlClient`)
 
-## Запуск на Windows
+## 📥 Скачать приложение для Windows
 
-Понадобятся **Visual Studio** с поддержкой разработки настольных .NET-приложений, **.NET Framework 4.8** и **SQL Server Express LocalDB**.
+[**Скачать StudentTracker — готовая сборка (Яндекс Диск)**](https://disk.yandex.ru/d/kXZrnjYn5MCNbw)
+
+Скачайте сборку по ссылке, при необходимости распакуйте архив и запустите `StudentTracker.exe`.
+
+Для работы необходимы **.NET Framework 4.8** и **SQL Server Express LocalDB** с экземпляром `(localdb)\MSSQLLocalDB`. Visual Studio для запуска готовой сборки не нужна.
+
+## Запуск из исходного кода
+
+Понадобится **Visual Studio** с поддержкой разработки настольных .NET-приложений, а также указанные выше компоненты.
 
 1. Склонируйте репозиторий:
 
@@ -36,7 +44,7 @@
    git clone https://github.com/Denis-100/StudentTracker.git
    ```
 
-2. Откройте в Visual Studio файл `StudentTracker/StudentTracker.csproj`.
+2. Откройте в Visual Studio файл `StudentTracker.sln`.
 3. Убедитесь, что доступен экземпляр LocalDB `(localdb)\MSSQLLocalDB`.
 4. Запустите приложение (**F5**).
 
